@@ -7,10 +7,10 @@ import sys
 log_file=sys.argv[1]
 dest_file=sys.argv[2]
 
-#retrieve data form a a http log file (access_log)
 data={}
 regex = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
 
+#Retrieve data form a a http log file (access_log)
 log_file=open(log_file,'r')
 for log_line in log_file:
 	log_line=re.match(regex,log_line).groups()
@@ -27,7 +27,7 @@ for log_line in log_file:
 	if (int(return_code)>0):
 		charcs={}
 		charcs['size']=int(size)
-		charcs['params_number']=int(param_number)
+		charcs['param_number']=int(param_number)
 		charcs['length']=int(url_length)
 		charcs['return_code']=int(return_code)
 		data[url]=charcs
@@ -39,7 +39,7 @@ for w in data:
 	patterns=['honeypot','%3b','xss','sql','union','%3c','%3e','eval']
 	if any(pattern in w.lower() for pattern in patterns):
 		attack='1'
-	data_row=str(data[w]['length'])+','+str(data[w]['params_number'])+','+str(data[w]['return_code'])+','+attack+','+w+'\n'
+	data_row=str(data[w]['length'])+','+str(data[w]['param_number'])+','+str(data[w]['return_code'])+','+attack+','+w+'\n'
 	labeled_data.write(data_row)
 
 print str(len(data))+' rows have successfully saved to '+dest_file
