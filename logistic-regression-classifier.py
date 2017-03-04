@@ -14,8 +14,13 @@ data_test=labeled_data_test[:,[0,1,2]]
 label_test=labeled_data_test[:,3]
 
 #The classifier
-attack_classifier=tree.DecisionTreeClassifier()
-attack_classifier=attack_classifier.fit(data_train,label_train)
+
+h = .02  # step size in the mesh
+
+attack_classifier = linear_model.LogisticRegression(C=1e5)
+
+attack_classifier.fit(data_train,label_train)
+
 
 c=0
 #predicted with the classifier
