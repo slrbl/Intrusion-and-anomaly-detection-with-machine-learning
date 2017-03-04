@@ -1,3 +1,12 @@
+# Version: 1.0 - 2017/03/04
+# About:Generate labeled data starting form raw http log file
+#	A sample of lableled data: 
+# 	url_length,param_number,return_code,label, http_query
+# 	49,1,404,1,GET /honeypot/bsidesdfw%20-%202014.ipynb HTTP/1.1
+#       Label could be 1 (attack detected) or 0 (no attack detected)
+
+
+
 import re
 import sys
 
