@@ -2,11 +2,10 @@ import numpy as np
 from sklearn import tree
 import sys
 
+# The labeled data to be used for training the classfier
 train_data_file=sys.argv[1]
+# The labeled data to be used for testing the classifier
 test_data_file=sys.argv[2]
-
-#train_data_file='labeled_data_train.csv'
-#test_data_file='labeled_data_train.csv'
 
 labeled_data_train = np.genfromtxt (train_data_file, delimiter=",")
 data_train=labeled_data_train[:,[0,1,2]]
