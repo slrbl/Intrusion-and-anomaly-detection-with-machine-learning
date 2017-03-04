@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn import tree,linear_model
+from sklearn import tree
 import sys
 
 train_data_file=sys.argv[1]
@@ -18,18 +18,6 @@ label_test=labeled_data_test[:,3]
 
 attack_classifier=tree.DecisionTreeClassifier()
 attack_classifier=attack_classifier.fit(data_train,label_train)
-
-# ---------------------
-
-h = .02  # step size in the mesh
-
-logreg = linear_model.LogisticRegression(C=1e5)
-
-logreg.fit(data_train,label_train)
-
-# ----------------
-
-#print test_data
 
 c=0
 predicted_count=0.
@@ -55,34 +43,6 @@ print fitted_count
 print 100.0*(fitted_count/predicted_count)
 
 print indices
-
-print "--------------------------------------------------------------------------------------------"
-c=0
-predicted_count=0.
-fitted_count=0. #exactly predicted
-
-
-indices=[]
-
-for predicted in logreg.predict(data_test):
-	if predicted==1:
-		indices.append(c)
-		predicted_count+=1
-		if label_test[c]==1:
-			fitted_count+=1
-		print predicted
-		print label_test[c]
-		print "-----------------"
-	c+=1
-
-print predicted_count
-print fitted_count
-
-
-print 100.0*(fitted_count/predicted_count)
-
-print indices
-#print attack_classifier.predict(data_test)
 
 with open("attack_decision_tree.dot", 'w') as f:
 	f = tree.export_graphviz(attack_classifier, out_file=f)
