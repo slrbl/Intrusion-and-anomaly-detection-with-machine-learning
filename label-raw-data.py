@@ -1,5 +1,7 @@
-# Version: 1.0 - 2017/03/04
+
 # About: Generate labeled data starting form raw http log file
+# Author: walid.daboubi@gmail.com
+# Version: 1.0 - 2017/03/04
 
 #	A sample of lableled data:
 # 	url_length,param_number,return_code,label, http_query
@@ -39,15 +41,15 @@ def extract_data(log_file):
 			charcs['return_code']=int(return_code)
 			data[url]=charcs
 	return data
-
+#label data by adding a new raw with two possible values: 1 for attack or suspecious activity and 0 for normal behaviour
 def label_data(data,labeled_data):
 	for w in data:
 		attack='0'
 		patterns=['honeypot','%3b','xss','sql','union','%3c','%3e','eval']
 		if any(pattern in w.lower() for pattern in patterns):
 			attack='1'
-			data_row=str(data[w]['length'])+','+str(data[w]['param_number'])+','+str(data[w]['return_code'])+','+attack+','+w+'\n'
-			labeled_data.write(data_row)
+		data_row=str(data[w]['length'])+','+str(data[w]['param_number'])+','+str(data[w]['return_code'])+','+attack+','+w+'\n'
+		labeled_data.write(data_row)
 	print str(len(data))+' rows have successfully saved to '+dest_file
 
 label_data(extract_data(log_file),open(dest_file,'w'))
