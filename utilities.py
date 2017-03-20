@@ -1,3 +1,6 @@
+#Author: Walid Daboubi
+#walid.daboubi@gmail.com
+
 import sys
 import numpy as np
 from sklearn import tree,linear_model
