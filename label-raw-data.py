@@ -1,5 +1,5 @@
 
-# About: Generate labeled data starting form raw http log file
+# About: Artificailly generate labeled data starting form raw http log file by adding rule based tags  
 # Author: walid.daboubi@gmail.com
 # Version: 1.0 - 2017/03/04
 
