@@ -1,6 +1,8 @@
 # Intrusion Detection With Machine Learning
 Machine learning algorithms applied on log analysis to detect intrusions and suspicious activities.
 
+## How to use
+### Convert your http log file into csv file
 
 
 
