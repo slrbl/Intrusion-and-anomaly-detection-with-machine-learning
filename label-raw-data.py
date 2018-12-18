@@ -1,7 +1,7 @@
 
-# About: Artificailly generate labeled data starting form raw http log file by adding rule based tags  
+# About: Artificailly generate labeled data starting form raw http log file by adding rule based tags
 # Author: walid.daboubi@gmail.com
-# Version: 1.0 - 2017/03/04
+# Version: 1.1 - 2018/12/18
 
 #	A sample of lableled data:
 # 	url_length,param_number,return_code,label, http_query
@@ -13,16 +13,23 @@
 
 import re
 import sys
+import argparse
 
-log_file=sys.argv[1]
-dest_file=sys.argv[2]
+parser = argparse.ArgumentParser()
+parser.add_argument('-l', '--log_file', help = 'The raw http log file', required = True)
+parser.add_argument('-d', '--dest_file', help = 'Destination to store the resulting csv file', required = True)
+args = vars(parser.parse_args())
+
+log_file = args['log_file']
+dest_file = args['dest_file']
 
 # Retrieve data form a a http log file (access_log)
 def extract_data(log_file):
 	regex = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
 	data = {}
-	log_file = open(log_file,'r')
+	log_file = open(log_file, 'r')
 	for log_line in log_file:
+		log_line=log_line.replace(',','_')
 		log_line = re.match(regex,log_line).groups()
 		size = str(log_line[4]).rstrip('\n')
 		return_code = log_line[3]
@@ -41,6 +48,8 @@ def extract_data(log_file):
 			charcs['return_code'] = int(return_code)
 			data[url] = charcs
 	return data
+
+
 # Label data by adding a new raw with two possible values: 1 for attack or suspecious activity and 0 for normal behaviour
 def label_data(data,labeled_data):
 	for w in data:
@@ -52,4 +61,4 @@ def label_data(data,labeled_data):
 		labeled_data.write(data_row)
 	print str(len(data)) + ' rows have successfully saved to ' + dest_file
 
-label_data(extract_data(log_file),open(dest_file,'w'))
+label_data(extract_data(log_file),open(dest_file, 'w'))
