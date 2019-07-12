@@ -1,6 +1,6 @@
 # About: Utilities
 # Author: walid.daboubi@gmail.com
-# Version: 1.1 - 2018/12/18
+# Version: 1.2 - 2019/07/13
 
 import sys
 import numpy as np
@@ -8,7 +8,6 @@ from sklearn import tree, linear_model
 import argparse
 
 def get_args():
-    # Get Arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--traning_data', help = 'Training data', required = True)
     parser.add_argument('-v', '--testing_data', help = 'Testing data', required = True)
@@ -20,6 +19,7 @@ def get_data_details(csv_data):
         features = data[:, [0, 1, 2]]
         labels = data[:, 3]
         return features, labels
+
 
 def get_occuracy(real_labels, predicted_labels, fltr):
         real_label_count = 0.0

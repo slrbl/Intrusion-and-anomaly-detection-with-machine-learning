@@ -1,7 +1,7 @@
 
 # About: Artificailly generate labeled data starting form raw http log file by adding rule based tags
 # Author: walid.daboubi@gmail.com
-# Version: 1.1 - 2018/12/18
+# Version: 1.2 - 2019/07/13
 
 #	A sample of lableled data:
 # 	url_length,param_number,return_code,label, http_query
@@ -22,6 +22,7 @@ args = vars(parser.parse_args())
 
 log_file = args['log_file']
 dest_file = args['dest_file']
+
 
 # Retrieve data form a a http log file (access_log)
 def extract_data(log_file):

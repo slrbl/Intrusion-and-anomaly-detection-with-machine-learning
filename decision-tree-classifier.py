@@ -1,7 +1,7 @@
 
 # About: Use supervised learning decision tree classifier to predict intrusion/suspecious activities in http logs
 # Author: walid.daboubi@gmail.com
-# Version: 1.1 - 2018/12/18
+# Version: 1.2 - 2019/07/13
 
 from utilities import *
 
