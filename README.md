@@ -1,7 +1,7 @@
 # Web attacks detection with machine learning
 Machine learning algorithms applied on HTTP logs analysis to detect intrusions and suspicious activities.
 
-## How to use
+## Usage
 ### Encode your http logs and save the result into a csv file
 <code> $ python label-raw-data.py -l ./raw-http-logs-samples/access-2018-12-15.log -d ./labeled-data-samples/access-2018-12-15.csv</code>
 
