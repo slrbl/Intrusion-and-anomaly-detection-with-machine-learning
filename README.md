@@ -8,6 +8,10 @@ Machine learning algorithms applied on HTTP logs analysis to detect intrusions a
 ### Train a model and test the prediction
 <code> $ python logistic-regression-classifier.py -t ./DATA/labeled-data-samples/all.csv -v ./labeled-data-samples/access-2018-12-15.csv </code>
 
+### Make a prediction for a new URL
+<code>#TODO</code>
+<code> $ python predict.py URL </code>
+
 <br>
 Details could be found here:
 <br>
