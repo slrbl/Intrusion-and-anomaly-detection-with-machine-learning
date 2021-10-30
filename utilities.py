@@ -1,6 +1,6 @@
 # About: Utilities
 # Author: walid.daboubi@gmail.com
-# Version: 1.2 - 2019/07/13
+# Version: 1.3 - 2021/10/30
 
 import sys
 import numpy as np
@@ -9,10 +9,12 @@ import argparse
 import pickle
 import time
 
+
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--traning_data', help = 'Training data', required = True)
     parser.add_argument('-v', '--testing_data', help = 'Testing data', required = True)
+    parser.add_argument('-a', '--training_algorithm', help = '"lr" for logistic regression or "dr" for decision tree', required = True)
     return vars(parser.parse_args())
 
 
@@ -42,3 +44,4 @@ def get_accuracy(real_labels, predicted_labels, fltr):
 def save_model(model,label):
     model_file_name = 'MODELS/attack_classifier_{}_{}.pkl'.format(label,int(time.time()))
     pickle.dump(model, open(model_file_name, 'wb'))
+    return model_file_name
