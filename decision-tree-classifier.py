@@ -27,4 +27,4 @@ attack_classifier = attack_classifier.fit(training_features, traning_labels)
 # Get predections for the testing data
 predictions = attack_classifier.predict(testing_features)
 
-print "The precision of the Decision Tree Classifier is: " + str(get_occuracy(testing_labels,predictions, 1)) + "%"
+print "The precision of the Decision Tree Classifier is: " + str(get_accuracy(testing_labels,predictions, 1)) + "%"

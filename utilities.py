@@ -21,18 +21,15 @@ def get_data_details(csv_data):
         return features, labels
 
 
-def get_occuracy(real_labels, predicted_labels, fltr):
+def get_accuracy(real_labels, predicted_labels, fltr):
         real_label_count = 0.0
         predicted_label_count = 0.0
-
         for real_label in real_labels:
                 if real_label == fltr:
                         real_label_count += 1
-
         for predicted_label in predicted_labels:
                 if predicted_label == fltr:
                         predicted_label_count += 1
-
         print "Real number of attacks: " + str(real_label_count)
         print "Predicted number of attacks: " + str(predicted_label_count)
 

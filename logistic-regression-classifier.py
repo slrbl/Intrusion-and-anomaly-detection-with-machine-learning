@@ -22,4 +22,4 @@ attack_classifier = linear_model.LogisticRegression(C = 1e5)
 attack_classifier.fit(training_features, traning_labels)
 
 predictions = attack_classifier.predict(testing_features)
-print "The precision of the Logistic Regression Classifier is: " + str(get_occuracy(testing_labels,predictions, 1)) + "%"
+print "The precision of the Logistic Regression Classifier is: " + str(get_accuracy(testing_labels,predictions, 1)) + "%"
