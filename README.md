@@ -13,7 +13,5 @@ Machine learning algorithms applied on HTTP logs analysis to detect intrusions a
 <code> $ python predict.py URL </code>
 
 ## Documentation
-<br>
 Details could be found here:
-<br>
 http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html

@@ -39,6 +39,6 @@ def get_accuracy(real_labels, predicted_labels, fltr):
         precision = predicted_label_count * 100 / real_label_count
         return precision
 
-def save_model(model):
-    model_file_name = 'MODELS/attack_classifier_{}.pkl'.format(int(time.time()))
+def save_model(model,label):
+    model_file_name = 'MODELS/attack_classifier_{}_{}.pkl'.format(label,int(time.time()))
     pickle.dump(model, open(model_file_name, 'wb'))

@@ -24,6 +24,9 @@ attack_classifier = tree.DecisionTreeClassifier()
 # Train the classifier
 attack_classifier = attack_classifier.fit(training_features, traning_labels)
 
+# Save the model
+save_model(attack_classifier,'dt')
+
 # Get predections for the testing data
 predictions = attack_classifier.predict(testing_features)
 
