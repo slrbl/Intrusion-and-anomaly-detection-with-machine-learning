@@ -30,7 +30,7 @@ def extract_data(log_file):
 	data = {}
 	log_file = open(log_file, 'r')
 	for log_line in log_file:
-		log_line=log_line.replace(',','_')
+		log_line = log_line.replace(',','_')
 		log_line = re.match(regex,log_line).groups()
 		size = str(log_line[4]).rstrip('\n')
 		return_code = log_line[3]
@@ -60,6 +60,6 @@ def label_data(data,labeled_data):
 			attack = '1'
 		data_row = str(data[w]['length']) + ',' + str(data[w]['param_number']) + ',' + str(data[w]['return_code']) + ',' + attack + ',' + w + '\n'
 		labeled_data.write(data_row)
-	print str(len(data)) + ' rows have successfully saved to ' + dest_file
+	print (str(len(data)) + ' rows have successfully saved to ' + dest_file)
 
 label_data(extract_data(log_file),open(dest_file, 'w'))
