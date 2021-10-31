@@ -8,15 +8,10 @@ from sklearn import tree, linear_model
 import argparse
 import pickle
 import time
+import re
+import sys
 
-
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--traning_data', help = 'Training data', required = True)
-    parser.add_argument('-v', '--testing_data', help = 'Testing data', required = True)
-    parser.add_argument('-a', '--training_algorithm', help = '"lr" for logistic regression or "dr" for decision tree', required = True)
-    return vars(parser.parse_args())
-
+REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
 
 def get_data_details(csv_data):
         print(csv_data)
@@ -24,7 +19,6 @@ def get_data_details(csv_data):
         features = data[:, [0, 1, 2]]
         labels = data[:, 3]
         return features, labels
-
 
 def get_accuracy(real_labels, predicted_labels, fltr):
         real_label_count = 0.0
@@ -41,7 +35,34 @@ def get_accuracy(real_labels, predicted_labels, fltr):
         precision = predicted_label_count * 100 / real_label_count
         return precision
 
+# Encode a signle log line
+def encode_single_log_line(log_line):
+	log_line = log_line.replace(',','_')
+	log_line = re.match(REGEX,log_line).groups()
+	url = log_line[2]
+	return_code = log_line[3]
+	param_number = len(url.split('&'))
+	url_length = len(url)
+	size = str(log_line[4]).rstrip('\n')
+	if '-' in size:
+		size = 0
+	else:
+		size = int(size)
+	if (int(return_code) > 0):
+		log_line_data = {}
+		log_line_data['size'] = int(size)
+		log_line_data['param_number'] = int(param_number)
+		log_line_data['length'] = int(url_length)
+		log_line_data['return_code'] = int(return_code)
+	else:
+		log_line_data = None
+	return url,log_line_data
+
 def save_model(model,label):
     model_file_name = 'MODELS/attack_classifier_{}_{}.pkl'.format(label,int(time.time()))
     pickle.dump(model, open(model_file_name, 'wb'))
     return model_file_name
+
+def load_model(model_file):
+    model = pickle.dump(model_file)
+    return model

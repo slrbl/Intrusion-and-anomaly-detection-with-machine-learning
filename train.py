@@ -5,6 +5,13 @@
 
 from utilities import *
 
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--traning_data', help = 'Training data', required = True)
+    parser.add_argument('-v', '--testing_data', help = 'Testing data', required = True)
+    parser.add_argument('-a', '--training_algorithm', help = '"lr" for logistic regression or "dr" for decision tree', required = True)
+    return vars(parser.parse_args())
+
 args = get_args()
 traning_data = args['traning_data']
 testing_data = args['testing_data']
