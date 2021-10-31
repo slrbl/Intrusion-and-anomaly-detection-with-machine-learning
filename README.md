@@ -5,17 +5,6 @@ Machine learning algorithms applied on HTTP logs analysis to detect intrusions a
 
 ## Usage
 ### Encode your http logs and save the result into a csv file
-<code>usage: encode.py [-h] -l LOG_FILE -d DEST_FILE [-a]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -l LOG_FILE, --log_file LOG_FILE
-                        The raw http log file
-  -d DEST_FILE, --dest_file DEST_FILE
-                        Destination to store the resulting csv file
-  -a, --artificial_label
-                        Generate an artificial label for each log line
-</code>  
 <code> $ python encode.py -a -l ./DATA/raw-http-logs-samples/access-2018-12-15.log -d ./DATA/labeled-data-samples/access-2018-12-15.csv</code>
 
 ### Train a model and test the prediction
