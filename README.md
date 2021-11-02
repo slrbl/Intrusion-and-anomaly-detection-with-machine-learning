@@ -1,7 +1,7 @@
 
 # Web attacks detection with machine learning
 ## About
-Web attack detection using Machine Learning trained with HTTP logs.
+Web attack detection using Machine Learning trained with your HTTP logs.
 
 ## Usage
 ### Encode your http logs and save the result into a csv file
