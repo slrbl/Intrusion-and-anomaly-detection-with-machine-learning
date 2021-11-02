@@ -1,11 +1,12 @@
 
 # Web attacks detection with machine learning
-## About
-Web attack detection using Machine Learning trained with your HTTP logs.
 
 <p align="center">
   <img width="600" src="https://images.unsplash.com/photo-1604274607187-ff498657d0ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80" />
 </p>
+
+## About
+A Web attack detection system using Machine Learning trained with your own HTTP logs.
 
 ## Usage
 ### Create a settings.conf file
