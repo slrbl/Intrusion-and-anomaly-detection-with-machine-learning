@@ -1,5 +1,5 @@
 
-# Webhawk
+# WEBHAWK
 Machine Learning based web attacks detection.
 
 <p align="center">
