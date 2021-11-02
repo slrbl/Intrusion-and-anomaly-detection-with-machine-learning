@@ -20,12 +20,12 @@ $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /se
 ```
 
 ### REST API
-#### Launch the API server 
+#### Launch the API server
 In order to use the API to need first to launch it's server as the following
 ```shell
 $ python3 -m uvicorn prediction_api:app --reload --host 0.0.0.0 --port 8000
 ```
-#### Make a predciton request 
+#### Make a predciton request
 You can use the following code which based on Python 'requests' (the same in test_api.py) to make a prediction using the REST API
 ```python
 import requests
@@ -44,6 +44,14 @@ It will return the following:
 ``` python
 {"prediction":"0","proba":"0.9975490196078431","log_line":"187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] \"GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1\" 200 1279418 \"http://www.secrepo.com/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta\""}
 ```
+
+### Docker
+#### Launch the API server
+To launch the prediction server using docker
+```shell
+$ docker-compose up
+```
+
 ## Documentation
 Details could be found here:
 <br>

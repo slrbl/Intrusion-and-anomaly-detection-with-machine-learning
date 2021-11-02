@@ -1,0 +1,7 @@
+version: '2.0'
+services:
+  http_attack_detection:
+    build: .
+    command: python3.8 -m uvicorn prediction_api:app --reload --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
