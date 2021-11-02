@@ -1,7 +1,7 @@
 
 # Web attacks detection with machine learning
 ## About
-Machine learning algorithms applied on HTTP logs analysis to detect intrusions and suspicious activities.
+Web attack detection using Machine Learning trained with HTTP logs.
 
 ## Usage
 ### Encode your http logs and save the result into a csv file
