@@ -4,6 +4,15 @@
 Web attack detection using Machine Learning trained with your HTTP logs.
 
 ## Usage
+### Settings file
+Rename copy to settings.conf and have fill it with the required parameters as the following.
+```shell
+[MODEL]
+model:MODELS/the_model_you_will_train.pkl
+[FEATURES]
+features:length,param_number,return_code,size,upper_cases,lower_cases,special_chars,depth
+```
+
 ### Encode your http logs and save the result into a csv file
 ```shell
 $ python encode.py -a -l ./DATA/raw-http-logs-samples/access-2018-12-15.log -d ./DATA/labeled-data-samples/access-2018-12-15.csv
