@@ -14,10 +14,16 @@ Machine learning algorithms applied on HTTP logs analysis to detect intrusions a
 <code> $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /self.logs/access.log.2016-07-20.gz HTTP/1.1" 404 340 "-" "python-requests/2.18.4"'</code>
 
 ### Make a prediction using a REST API
-<code>headers = {
+
+
+```python
+headers = {
     'accept': 'application/json',
     'Content-Type': 'application/json',
-}</code>
+}
+```
+
+<code></code>
 <br>
 <code>data = {
     'http_log_line': '187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] "GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1" 200 1279418 "http://www.secrepo.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta"'
