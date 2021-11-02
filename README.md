@@ -4,7 +4,7 @@
 Web attack detection using Machine Learning trained with your HTTP logs.
 
 ## Usage
-### Settings file
+### Create a settings.conf file
 Rename copy to settings.conf and have fill it with the required parameters as the following.
 ```shell
 [MODEL]
