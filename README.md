@@ -1,5 +1,5 @@
 
-# WEBHAWK
+# Webhawk
 Machine Learning based web attacks detection.
 
 <p align="center">
@@ -7,7 +7,7 @@ Machine Learning based web attacks detection.
 </p>
 
 ## About
-A Web attack detection system using Machine Learning trained with your own HTTP logs.
+Webhawk is a Machine Leatning powered Web attack detection system. It uses your web logs as training data. Webhawk offers a REST API that makes it easy to integrate within your SoC ecosystem. To train a detection model and use it as an extra security level in your organization, follwo the following steps.
 
 ## Usage
 ### Create a settings.conf file
