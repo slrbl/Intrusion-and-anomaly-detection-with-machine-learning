@@ -4,7 +4,7 @@
 Web attack detection using Machine Learning trained with your HTTP logs.
 
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1553729049-19f5f148e539" />
+  <img width="300px" src="https://images.unsplash.com/photo-1604356589793-49703c50152d" />
 </p>
 
 ## Usage
