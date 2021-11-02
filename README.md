@@ -24,7 +24,7 @@ $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /se
 
 ```shell
 $ python3 -m uvicorn prediction_api:app --reload --host 0.0.0.0 --port 8000```
-```shell
+```
 
 #### Make a predciton request 
 You can use the following code (the same in test_api.py) to make a prediction using the REST API
