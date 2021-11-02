@@ -49,7 +49,7 @@ It will return the following:
 #### Launch the API server
 To launch the prediction server using docker
 ```shell
-$ docker-compose up
+$ docker compose up
 ```
 ## Documentation
 Details could be found here:
