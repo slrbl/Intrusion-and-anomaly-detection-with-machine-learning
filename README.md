@@ -23,7 +23,7 @@ $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /se
 #### Launch the API server
 In order to use the API to need first to launch it's server as the following
 ```shell
-$ python3 -m uvicorn prediction_api:app --reload --host 0.0.0.0 --port 8000
+$ python3 -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
 ```
 #### Make a predciton request
 You can use the following code which based on Python 'requests' (the same in test_api.py) to make a prediction using the REST API
@@ -51,7 +51,6 @@ To launch the prediction server using docker
 ```shell
 $ docker-compose up
 ```
-
 ## Documentation
 Details could be found here:
 <br>

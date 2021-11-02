@@ -1,9 +1,9 @@
-# About: prediction_api.py
+# About: api.py
 # Author: walid.daboubi@gmail.com
 # Version: 1.3 - 2021/11/02
 
 # To be launched as the following
-# python3 -m uvicorn prediction_api:app --reload --host 0.0.0.0 --port 8000
+# python3 -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
 
 from utilities import *
 from fastapi import FastAPI
