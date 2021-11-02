@@ -3,6 +3,10 @@
 ## About
 Web attack detection using Machine Learning trained with your HTTP logs.
 
+<p align="center">
+  <img src="https://images.unsplash.com/photo-1553729049-19f5f148e539" />
+</p>
+
 ## Usage
 ### Create a settings.conf file
 Rename copy to settings.conf and have fill it with the required parameters as the following.
