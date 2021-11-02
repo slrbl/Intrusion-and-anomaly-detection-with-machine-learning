@@ -20,9 +20,10 @@ $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /se
 ```
 
 ### Make a prediction using a REST API
-
-
+You can use the following code (the same in test_api.py) to make a prediction using the REST API
 ```python
+import requests
+import json
 headers = {
     'accept': 'application/json',
     'Content-Type': 'application/json',
