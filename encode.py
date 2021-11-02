@@ -35,6 +35,14 @@ def encode_log_file(log_file):
 			data[url] = log_line_data
 	return data
 
+
+def encode_single_line(single_line,features):
+	encoded = ""
+	for feature in features:
+		encoded += str(single_line[feature]) + ','
+	return encoded
+
+
 # Label data by adding a new raw with two possible values: 1 for attack or suspecious activity and 0 for normal behaviour
 def save_encoded_data(data,encoded_data_file,artificial_label):
 	for w in data:
@@ -43,9 +51,9 @@ def save_encoded_data(data,encoded_data_file,artificial_label):
 			patterns = ['honeypot', '%3b', 'xss', 'sql', 'union', '%3c', '%3e', 'eval']
 			if any(pattern in w.lower() for pattern in patterns):
 				attack = '1'
-			data_row = str(data[w]['length']) + ',' + str(data[w]['param_number']) + ',' + str(data[w]['return_code']) + ',' + attack + ',' + w + '\n'
+			data_row = encode_single_line(data[w],FEATURES) + attack + ',' + w + '\n'
 		else:
-			data_row = str(data[w]['length']) + ',' + str(data[w]['param_number']) + ',' + str(data[w]['return_code']) +  ',' + w + '\n'
+			data_row = encode_single_line(data[w],FEATURES) + w + '\n'
 		encoded_data_file.write(data_row)
 	print (str(len(data)) + ' rows have successfully saved to ' + dest_file)
 
