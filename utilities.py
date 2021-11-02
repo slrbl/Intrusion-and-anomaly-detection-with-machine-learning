@@ -2,6 +2,7 @@
 # Author: walid.daboubi@gmail.com
 # Version: 1.3 - 2021/10/30
 
+import configparser
 import sys
 import numpy as np
 from sklearn import tree, linear_model
@@ -13,7 +14,13 @@ import sys
 
 REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
 SPECIAL_CHARS = "[$&+,:;=?@#|'<>.^*()%!-]"
-FEATURES = ['length','param_number','return_code','size','upper_cases','lower_cases','special_chars','depth']
+
+config = configparser.ConfigParser()
+config.sections()
+config.read('settings.conf')
+
+MODEL = config['MODEL']['model']
+FEATURES = config['FEATURES']['features'].split(',')
 
 def get_data_details(csv_data):
         print(csv_data)

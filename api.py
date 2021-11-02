@@ -19,7 +19,7 @@ app = FastAPI()
 def predict(data: HttpLogQueryModel):
     data = data.dict()
     url,encoded = encode_single_log_line(data['http_log_line'])
-    model = pickle.load(open('MODELS/attack_classifier_dt_1635623046.pkl', 'rb'))
+    model = pickle.load(open(MODEL, 'rb'))
     formatte_encoded = [encoded['length'],encoded['param_number'],encoded['return_code']]
     prediction = int(model.predict([formatte_encoded])[0])
     proba = model.predict_proba([formatte_encoded])[0][prediction]

@@ -1,5 +1,6 @@
 FROM python:3.8
 
+RUN pip3.8 install configparser
 RUN pip3.8 install requests
 RUN pip3.8 install pydantic
 RUN pip3.8 install argparse

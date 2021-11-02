@@ -1,2 +1,3 @@
 MODELS/*.pkl
 *.pyc
+settings.conf
