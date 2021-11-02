@@ -19,7 +19,14 @@ $ python train.py -a 'lr' -t ./DATA/labeled-data-samples/all.csv -v ./DATA/label
 $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /self.logs/access.log.2016-07-20.gz HTTP/1.1" 404 340 "-" "python-requests/2.18.4"'
 ```
 
-### Make a prediction using a REST API
+### Make a prediction using a the REST API
+#### Launch the API server 
+
+```shell
+$ python3 -m uvicorn prediction_api:app --reload --host 0.0.0.0 --port 8000```
+```shell
+
+#### Make a predciton request 
 You can use the following code (the same in test_api.py) to make a prediction using the REST API
 ```python
 import requests
