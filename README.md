@@ -19,7 +19,7 @@ $ python train.py -a 'lr' -t ./DATA/labeled-data-samples/all.csv -v ./DATA/label
 $ python predict.py -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /self.logs/access.log.2016-07-20.gz HTTP/1.1" 404 340 "-" "python-requests/2.18.4"'
 ```
 
-### Make a prediction using a the REST API
+### REST API
 #### Launch the API server 
 In order to use the API to need first to launch it's server as the following
 ```shell
