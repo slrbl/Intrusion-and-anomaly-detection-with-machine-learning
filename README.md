@@ -69,7 +69,7 @@ $ docker compose build
 $ docker compose up
 ```
 ## Used sample data
-The data you will find at DATA folder comes from https://www.secrepo.com.
+The data you will find in DATA folder comes from https://www.secrepo.com.
 
 ## Documentation
 Details on how this tools is build could be found at http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
