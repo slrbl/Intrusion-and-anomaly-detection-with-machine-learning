@@ -21,12 +21,13 @@ features:length,param_number,return_code,size,upper_cases,lower_cases,special_ch
 
 ### Encode your http logs and save the result into a csv file
 ```shell
-$ python encode.py -a -l ./DATA/raw-http-logs-samples/access-2018-12-15.log -d ./DATA/labeled-data-samples/access-2018-12-15.csv
+$ python encode.py -a -l ./DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./DATA/labeled-data-samples/aug_sep_oct_2021.csv
 ```
 
 ### Train a model and test the prediction
+Use the http log data from May to July 2021 to train a model, and test it with the data from August to October 2021.
 ```shell
-$ python train.py -a 'lr' -t ./DATA/labeled-data-samples/all.csv -v ./DATA/labeled-data-samples/access-2018-12-15.csv
+$ python train.py -a 'dt' -t ./DATA/labeled-data-samples/may_jun_jul_2021.csv -v ./DATA/labeled-data-samples/aug_sep_oct_2021.csv
 ```
 
 ### Make a prediction for a single log line
@@ -64,8 +65,12 @@ It will return the following:
 #### Launch the API server
 To launch the prediction server using docker
 ```shell
+$ docker compose build
 $ docker compose up
 ```
+## Used sample data
+The data you will find at DATA folder comes from https://www.secrepo.com.
+
 ## Documentation
 Details could be found here:
 <br>

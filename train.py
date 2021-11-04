@@ -25,7 +25,7 @@ testing_features, testing_labels = get_data_details(testing_data)
 if training_algorithm == 'lr':
     # LOGISTIC REGRESSION CLASSIFIER
     print("\n\n=-=-=-=-=-=-=- Logistic Regression Classifier -=-=-=-=-=-\n")
-    attack_classifier = linear_model.LogisticRegression(solver='lbfgs', max_iter=100)
+    attack_classifier = linear_model.LogisticRegression()
 elif training_algorithm == 'dt':
     # DECISON TREE CLASSIFIER
     print("\n\n=-=-=-=-=-=-=- Decision Tree Classifier -=-=-=-=-=-=-=-\n")

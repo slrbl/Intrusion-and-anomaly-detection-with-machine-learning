@@ -12,21 +12,19 @@ import time
 import re
 import sys
 
-REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
-SPECIAL_CHARS = "[$&+,:;=?@#|'<>.^*()%!-]"
-
 config = configparser.ConfigParser()
 config.sections()
 config.read('settings.conf')
 
 MODEL = config['MODEL']['model']
 FEATURES = config['FEATURES']['features'].split(',')
+REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
+SPECIAL_CHARS = "[$&+,:;=?@#|'<>.^*()%!-]"
 
 def get_data_details(csv_data):
-        print(csv_data)
         data = np.genfromtxt(csv_data, delimiter = ",")
-        features = data[:, [0-(len(FEATURES)-1)]]
-        labels = data[:, len(FEATURES)]
+        features = data[:,list(range(0,len(FEATURES)))]
+        labels = data[:,[len(FEATURES)]]
         return features, labels
 
 def get_accuracy(real_labels, predicted_labels, fltr):
@@ -40,14 +38,12 @@ def get_accuracy(real_labels, predicted_labels, fltr):
                         predicted_label_count += 1
         print("Real number of attacks: " + str(real_label_count))
         print("Predicted number of attacks: " + str(predicted_label_count))
-
         precision = predicted_label_count * 100 / real_label_count
         return precision
 
 
 # Encode a signle log line
 def encode_single_log_line(log_line):
-    print(log_line)
     log_line = log_line.replace(',','_')
     log_line = re.match(REGEX,log_line).groups()
     url = log_line[2]
@@ -75,7 +71,6 @@ def encode_single_log_line(log_line):
         log_line_data['depth'] = int(depth)
     else:
         log_line_data = None
-    print(log_line_data)
     return url,log_line_data
 
 def save_model(model,label):

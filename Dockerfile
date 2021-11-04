@@ -9,6 +9,6 @@ RUN pip3.8 install uvicorn
 RUN pip3.8 install fastapi
 RUN pip3.8 install numpy
 
-RUN mkdir /http_attack_detection
-COPY . /http_attack_detection
-WORKDIR /http_attack_detection
+RUN mkdir /webhawk
+COPY . /webhawk
+WORKDIR /webhawk
