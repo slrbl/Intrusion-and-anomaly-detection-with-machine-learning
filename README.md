@@ -72,6 +72,4 @@ $ docker compose up
 The data you will find at DATA folder comes from https://www.secrepo.com.
 
 ## Documentation
-Details could be found here:
-<br>
-http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
+Details on how this tools is build could be found at http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
