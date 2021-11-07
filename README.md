@@ -3,7 +3,7 @@
 Machine Learning based web attacks detection.
 
 <p align="center">  
-  <img width="600" src="https://images.unsplash.com/photo-1607240376903-9a1f6d09330d">
+  <img width="600" src="https://images.unsplash.com/photo-1607240376903-9a1f6d09330d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80">
 </p>
 
 ## About
