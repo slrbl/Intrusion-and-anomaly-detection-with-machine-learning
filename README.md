@@ -70,7 +70,8 @@ $ docker compose build
 $ docker compose up
 ```
 ## Used sample data
-The data you will find in SAMPLE_DATA folder comes from https://www.secrepo.com.
+The data you will find in SAMPLE_DATA folder comes from<br>
+https://www.secrepo.com.
 
 ## Documentation
 Details on how this tools is build could be found at<br>
