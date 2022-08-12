@@ -76,7 +76,7 @@ The data you will find in SAMPLE_DATA folder comes from https://www.secrepo.com.
 Details on how this tools is build could be found at http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
 
 ## Todo
-To extract/add more features (Eg: day of the time, week, month).
+To extract/add more features (Eg: hour of the day, day of the week, week, month).
 <br>To find a better way to label training data
 <br>To add the possibility to use unsupervised learning.
 
