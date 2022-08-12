@@ -1,3 +1,5 @@
 MODELS/*.pkl
+__pycache_/*
 *.pyc
+*.DS_Store
 settings.conf

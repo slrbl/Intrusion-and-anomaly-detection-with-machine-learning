@@ -4,7 +4,8 @@
 
 # To be launched as the following
 # python3 -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
-from utilities import *
+
+from helpers import *
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -17,13 +18,13 @@ app = FastAPI()
 
 def predict(data: HttpLogQueryModel):
     data = data.dict()
-    url,encoded = encode_single_log_line(data['http_log_line'])
+    url,encoded = encode_log_line(data['http_log_line'])
     model = pickle.load(open(MODEL, 'rb'))
-    formatte_encoded = []
+    formatted_encoded = []
     for feature in FEATURES:
-        formatte_encoded.append(encoded[feature])
-    prediction = int(model.predict([formatte_encoded])[0])
-    proba = model.predict_proba([formatte_encoded])[0][prediction]
+        formatted_encoded.append(encoded[feature])
+    prediction = int(model.predict([formatted_encoded])[0])
+    proba = model.predict_proba([formatted_encoded])[0][prediction]
     return {
         'prediction': str(prediction),
         'proba':str(proba),
