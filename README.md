@@ -73,7 +73,8 @@ $ docker compose up
 The data you will find in SAMPLE_DATA folder comes from https://www.secrepo.com.
 
 ## Documentation
-Details on how this tools is build could be found at http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
+Details on how this tools is build could be found at<br>
+http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
 
 ## Todo
 To extract/add more features (Eg: hour of the day, day of the week, week, month).
