@@ -24,9 +24,9 @@ def predict(data: HttpLogQueryModel):
     for feature in FEATURES:
         formatted_encoded.append(encoded[feature])
     prediction = int(model.predict([formatted_encoded])[0])
-    proba = model.predict_proba([formatted_encoded])[0][prediction]
+    confidence = model.predict_confidence([formatted_encoded])[0][prediction]
     return {
         'prediction': str(prediction),
-        'proba':str(proba),
+        'confidence':str(confidence),
         'log_line':data['http_log_line']
     }
