@@ -1,7 +1,7 @@
 
 # About: Artificailly generate labeled data starting form raw http log file by adding rule based tags
 # Author: walid.daboubi@gmail.com
-# Version: 1.3 - 2021/10/30
+# Version: 2.0 - 2022/08/14
 
 #	A sample of lableled data:
 # 	url_length,params_number,return_code,label, http_query
@@ -30,32 +30,42 @@ def encode_log_file(log_file):
 	data = {}
 	log_file = open(log_file, 'r')
 	for log_line in log_file:
+		log_line=log_line.replace(',','#')
+		log_line=log_line.replace(';','#')
 		url,log_line_data = encode_log_line(log_line)
 		if log_line_data != None:
-			data[url] = log_line_data
+			#data[url] = log_line_data
+			data[log_line] = log_line_data
 	return data
 
 
 def encode_single_line(single_line,features):
 	encoded = ""
 	for feature in features:
-		encoded += str(single_line[feature]) + ','
+		encoded += '{},'.format(single_line[feature])
 	return encoded
 
 
-# Label data by adding a new raw with two possible values: 1 for attack or suspecious activity and 0 for normal behaviour
-def save_encoded_data(data,encoded_data_file,artificial_label):
-	for w in data:
+def add_artificial_labels(data,artificial_label):
+	labelled_data_str = '{},label,log_line\n'.format(config['FEATURES']['features'])
+	for url in data:
+		# U for unknown
+		attack_label = 'U'
 		if artificial_label == True:
-			attack = '0'
+			attack_label = '0'
+			# Ths patterns are not exhaustive and they are here just for the simulation pupose
 			patterns = ['honeypot', '%3b', 'xss', 'sql', 'union', '%3c', '%3e', 'eval']
-			if any(pattern in w.lower() for pattern in patterns):
-				attack = '1'
-			data_row = encode_single_line(data[w],FEATURES) + attack + ',' + w + '\n'
-		else:
-			data_row = encode_single_line(data[w],FEATURES) + w + '\n'
-		encoded_data_file.write(data_row)
-	print (str(len(data)) + ' rows have successfully saved to ' + dest_file)
+			if any(pattern in url.lower() for pattern in patterns):
+				attack_label = '1'
+		labelled_data_str += '{}{},{}'.format(encode_single_line(data[url],FEATURES),attack_label,url)
+	return len(data),labelled_data_str
 
 
-save_encoded_data(encode_log_file(log_file),open(dest_file, 'w'),artificial_label)
+def save_encoded_data(labelled_data_str,encoded_data_file,data_size):
+	print(labelled_data_str)
+	encoded_data_file.write(labelled_data_str)
+	print ('{} rows have successfully saved to {}'.format(data_size,dest_file))
+
+
+data_size,labelled_data_str = add_artificial_labels(encode_log_file(log_file),artificial_label)
+save_encoded_data(labelled_data_str,open(dest_file, 'w'),data_size)

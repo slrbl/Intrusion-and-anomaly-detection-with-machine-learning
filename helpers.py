@@ -1,6 +1,6 @@
 # About: Utilities
 # Author: walid.daboubi@gmail.com
-# Version: 1.3 - 2021/10/30
+# Version: 2.0 - 2022/08/14
 
 import configparser
 import sys
@@ -11,6 +11,7 @@ import pickle
 import time
 import re
 import sys
+from pandas import *
 
 config = configparser.ConfigParser()
 config.sections()
@@ -52,12 +53,21 @@ def encode_log_line(log_line):
         log_line_data = None
     return url,log_line_data
 
-
+"""
 def load_encoded_data(csv_data):
         data = np.genfromtxt(csv_data, delimiter = ",")
         features = data[:,list(range(0,len(FEATURES)))]
         labels = data[:,[len(FEATURES)]]
         return features, labels
+"""
+
+
+def load_encoded_data(csv_data):
+    data = read_csv(csv_data)
+    labels = data['label']
+    features = data.to_numpy()[:,list(range(0,len(FEATURES)))]
+    return features, labels
+
 
 def get_accuracy(real_labels, predicted_labels, fltr):
         real_label_count = 0.0

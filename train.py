@@ -1,7 +1,7 @@
 
 # About: Use supervised learning logistic regression classifier to predict intrusion/suspecious activities in http logs
 # Author: walid.daboubi@gmail.com
-# Version: 1.3 - 2021/10/30
+# Version: 2.0 - 2022/08/14
 
 from helpers import *
 
