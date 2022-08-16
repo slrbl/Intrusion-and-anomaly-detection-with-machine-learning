@@ -15,8 +15,8 @@ Webhawk is an open source machine learning powered Web attack detection tool. It
 $ python encode.py -a -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
 ```
 Please note that two already encoded data file are available in ./SAMPLE_DATA/labeled-encoded-data-samples/, in case you would like to move directly to the next step.
-### Run the script unsupervised_detection.py
-Here is an example: 
+### Run the detection script
+Get inspired form this example:
 ```shell
 $ python3 unsupervised_detection.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5
 ```
