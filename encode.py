@@ -11,6 +11,8 @@
 # A HTTP LOG LINE SAMPLE
 # 182.74.246.198 - - [01/Mar/2017:02:18:36 -0800] "GET /bootstrap/img/favicon.ico HTTP/1.1" 200 589 "http://www.secrepo.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
 
+import argparse
+
 from helpers import *
 
 parser = argparse.ArgumentParser()
@@ -30,41 +32,37 @@ def encode_log_file(log_file):
 	data = {}
 	log_file = open(log_file, 'r')
 	for log_line in log_file:
-		log_line=log_line.replace(',','#')
-		log_line=log_line.replace(';','#')
-		url,log_line_data = encode_log_line(log_line)
-		if log_line_data != None:
+		log_line=log_line.replace(',','#').replace(';','#')
+		_,log_line_data = encode_log_line(log_line)
+		if log_line_data is not None:
 			#data[url] = log_line_data
 			data[log_line] = log_line_data
 	return data
 
 
 def encode_single_line(single_line,features):
-	encoded = ""
-	for feature in features:
-		encoded += '{},'.format(single_line[feature])
-	return encoded
+    return ",".join((single_line[feature] for feature in features))
 
 
 def add_artificial_labels(data,artificial_label):
-	labelled_data_str = '{},label,log_line\n'.format(config['FEATURES']['features'])
+	labelled_data_str = f"{config['FEATURES']['features']},label,log_line\n"
 	for url in data:
 		# U for unknown
 		attack_label = 'U'
-		if artificial_label == True:
+		if artificial_label:
 			attack_label = '0'
 			# Ths patterns are not exhaustive and they are here just for the simulation pupose
-			patterns = ['honeypot', '%3b', 'xss', 'sql', 'union', '%3c', '%3e', 'eval']
+			patterns = ('honeypot', '%3b', 'xss', 'sql', 'union', '%3c', '%3e', 'eval')
 			if any(pattern in url.lower() for pattern in patterns):
 				attack_label = '1'
-		labelled_data_str += '{}{},{}'.format(encode_single_line(data[url],FEATURES),attack_label,url)
+		labelled_data_str += f"{encode_single_line(data[url],FEATURES)}{attack_label},{url}"
 	return len(data),labelled_data_str
 
 
 def save_encoded_data(labelled_data_str,encoded_data_file,data_size):
 	print(labelled_data_str)
 	encoded_data_file.write(labelled_data_str)
-	print ('{} rows have successfully saved to {}'.format(data_size,dest_file))
+	print('{} rows have successfully saved to {}'.format(data_size,dest_file))
 
 
 data_size,labelled_data_str = add_artificial_labels(encode_log_file(log_file),artificial_label)

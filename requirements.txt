@@ -1,0 +1,11 @@
+argparse
+configparser
+fastapi
+matplotlib
+numpy
+pandas
+pydantic
+pytz
+requests
+scikit-learn
+uvicorn

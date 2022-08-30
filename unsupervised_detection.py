@@ -2,27 +2,30 @@
 # Author: walid.daboubi@gmail.com
 # Version: 2.0 - 2022/08/14
 
-from helpers import *
+import argparse
+
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.cluster import DBSCAN
+import pandas as pd
 from sklearn import metrics
-import sys
+from sklearn.cluster import DBSCAN
+
+from helpers import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-l', '--encoded_logs_file', help = 'The file containing the encoded logs', required = True)
-parser.add_argument('-e', '--eps', help = 'Max distance between two points. The default value is 500', required = False)
-parser.add_argument('-s', '--min_samples', help = 'Minimum number of points with the same cluster. The default value is 2', required = False)
-parser.add_argument('-j', '--log_lines_limit', help = 'The maximum number of log lines of consider. The default value is 5000', required = False)
-parser.add_argument('-v', '--show_plots', help = 'Show plots',  action='store_true')
+parser.add_argument('-l', '--encoded_logs_file', help='The file containing the encoded logs', required=True)
+parser.add_argument('-e', '--eps', help='Max distance between two points. The default value is 500', required=False)
+parser.add_argument('-s', '--min_samples', help='Minimum number of points with the same cluster. The default value is 2', required=False)
+parser.add_argument('-j', '--log_lines_limit', help='The maximum number of log lines of consider. The default value is 5000', required=False)
+parser.add_argument('-v', '--show_plots', help='Show plots',  action='store_true')
 
 # Get parameters
 args = vars(parser.parse_args())
 
 ENCODED_LOG_FILE = args['encoded_logs_file']
-LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] != None else 5000
-EPS = float(args['eps']) if args['eps'] != None else 500
-MIN_SAMPLES = int(args['min_samples']) if args['min_samples'] != None else 2
+LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] is not None else 5000
+EPS = float(args['eps']) if args['eps'] is not None else 500
+MIN_SAMPLES = int(args['min_samples']) if args['min_samples'] is not None else 2
 SHOW_PLOTS = args['show_plots']
 
 
@@ -34,11 +37,11 @@ def plot_informative(x,y,z):
     plt.title("A visualisation of 2 selected  features")
     plt.show()
     # 3D informational plot
-    fig = plt.figure(figsize = (10, 7))
-    ax = plt.axes(projection ="3d")
+    fig = plt.figure(figsize=(10, 7))
+    ax = plt.axes(projection="3d")
     # Creating plot
     print('Plotting an informative 2 dimensional visualisation')
-    ax.scatter3D(x, y, z, color = "black")
+    ax.scatter3D(x, y, z, color="black")
     plt.title("A visualisation of 3 selected  features")
     # show plot
     plt.show()
@@ -46,14 +49,14 @@ def plot_informative(x,y,z):
 
 def main():
     # Get the raw log lines
-    data = read_csv(ENCODED_LOG_FILE).head(LOG_SIZE_LIMIT)
+    data = pd.read_csv(ENCODED_LOG_FILE).head(LOG_SIZE_LIMIT)
     # convert to a dataframe
     # features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth
     dataframe = data.to_numpy()[:,list(range(0,8))]
 
     print('> Webhawk 2.0')
 
-    if SHOW_PLOTS == True:
+    if SHOW_PLOTS:
         print('Plotting size, special_chars and url_depth')
         plot_informative(data['size'], data['special_chars'], data['url_depth'])
 
@@ -73,7 +76,7 @@ def main():
         log_line_number += 1
 
     # Number of clusters in labels, ignoring noise if present.
-    n_clusters = len(set(labels)) #- (1 if -1 in labels else 0)
+    n_clusters = len(set(labels))  #- (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
 
     print("\nEstimated number of clusters: %d" % n_clusters)
@@ -81,7 +84,7 @@ def main():
     print("DBSCAN Silhouette Coefficient: %0.3f" % metrics.silhouette_score(dataframe, labels))
     print('{} log lines has detected as containing potential malicious behaviour traces'.format(list(labels).count(-1)))
 
-    if SHOW_PLOTS == True:
+    if SHOW_PLOTS:
         # Black removed and is used for noise instead.
         unique_labels = set(labels)
         colors = [plt.cm.Spectral(each) for each in np.linspace(0, 1, len(unique_labels))]

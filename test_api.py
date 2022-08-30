@@ -1,8 +1,9 @@
 # This script is to be used to test the API
 
-import requests
 import json
 import sys
+
+import requests
 
 headers = {
     'accept': 'application/json',
@@ -13,9 +14,9 @@ data = {
 }
 try:
     response = requests.post('http://127.0.0.1:8000/predict', headers=headers, data=json.dumps(data))
-    print (response.text)
+    print(response.text)
 except:
-    print ('Something went wrong testing the API.\nExiting')
+    print('Something went wrong testing the API.\nExiting')
     sys.exit(1)
 
 # It should return
