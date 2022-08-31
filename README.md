@@ -18,7 +18,7 @@ Please note that two already encoded data file are available in ./SAMPLE_DATA/la
 ### Run the unsupervised detection script
 Get inspired form this example:
 ```shell
-$ python3 unsupervised_detection.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5
+$ python unsupervised_detection.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5
 ```
 
 ## Supervised detection Usage
