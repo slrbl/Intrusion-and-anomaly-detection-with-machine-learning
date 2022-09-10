@@ -46,7 +46,7 @@ def encode_single_line(single_line,features):
 	return encoded
 
 
-def add_artificial_labels(data,artificial_label):
+def add_simulation_labels(data,artificial_label):
 	labelled_data_str = '{},label,log_line\n'.format(config['FEATURES']['features'])
 	for url in data:
 		# U for unknown
@@ -67,5 +67,5 @@ def save_encoded_data(labelled_data_str,encoded_data_file,data_size):
 	print ('{} rows have successfully saved to {}'.format(data_size,dest_file))
 
 
-data_size,labelled_data_str = add_artificial_labels(encode_log_file(log_file),artificial_label)
+data_size,labelled_data_str = add_simulation_labels(encode_log_file(log_file),artificial_label)
 save_encoded_data(labelled_data_str,open(dest_file, 'w'),data_size)
