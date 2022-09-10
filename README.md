@@ -9,6 +9,13 @@ Machine Learning based web attacks detection.
 ## About
 Webhawk is an open source machine learning powered Web attack detection tool. It uses your web logs as training data. Webhawk offers a REST API that makes it easy to integrate within your SoC ecosystem. To train a detection model and use it as an extra security level in your organization, follwo the following steps.
 
+### Using a Python virtual env
+```shell
+python -m venv webhawk_venv
+source webhawk_venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## Unsupervised detection Usage
 ### Encode your http logs and save the result into a csv file
 ```shell
@@ -74,7 +81,7 @@ It will return the following:
 {"prediction":"0","confidence":"0.9975490196078431","log_line":"187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] \"GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1\" 200 1279418 \"http://www.secrepo.com/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta\""}
 ```
 
-### Docker
+### Using Docker
 #### Launch the API server
 To launch the prediction server using docker
 ```shell
