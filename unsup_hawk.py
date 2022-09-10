@@ -68,7 +68,7 @@ def main():
     log_line_number = 0
     for label in labels:
         if label == -1:
-            print('\n\t/!\ Possible anomalous behaviour detected in line:{}'.format(log_line_number))
+            print('\n\t/!\ Webhawk - Possible anomalous behaviour detected in line:{}'.format(log_line_number))
             print('\t{}'.format(data['log_line'][log_line_number]))
         log_line_number += 1
 
