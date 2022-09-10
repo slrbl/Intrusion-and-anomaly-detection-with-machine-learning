@@ -53,14 +53,6 @@ def encode_log_line(log_line):
         log_line_data = None
     return url,log_line_data
 
-"""
-def load_encoded_data(csv_data):
-        data = np.genfromtxt(csv_data, delimiter = ",")
-        features = data[:,list(range(0,len(FEATURES)))]
-        labels = data[:,[len(FEATURES)]]
-        return features, labels
-"""
-
 
 def load_encoded_data(csv_data):
     data = read_csv(csv_data)
