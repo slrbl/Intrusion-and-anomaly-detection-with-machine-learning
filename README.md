@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ## Unsupervised detection Usage
 ### Encode your http logs and save the result into a csv file
 ```shell
-$ python encode.py -a -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
+$ python encode.py -a -t apache -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
 ```
 Please note that two already encoded data file are available in ./SAMPLE_DATA/labeled-encoded-data-samples/, in case you would like to move directly to the next step.
 ### Run the unsupervised detection script
@@ -40,7 +40,7 @@ features:length,params_number,return_code,size,upper_cases,lower_cases,special_c
 
 ### Encode your http logs and save the result into a csv file
 ```shell
-$ python encode.py -a -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
+$ python encode.py -a -t apache -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
 ```
 Please note that two already encoded data file are available in ./SAMPLE_DATA/labeled-encoded-data-samples/, in case you would like to move directly to the next step.
 
@@ -71,7 +71,8 @@ headers = {
     'Content-Type': 'application/json',
 }
 data = {
-    log_type:'apache','http_log_line': '187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] "GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1" 200 1279418 "http://www.secrepo.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta"'
+    'log_type':'apache',
+    'http_log_line': '187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] "GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1" 200 1279418 "http://www.secrepo.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta"'
 }
 response = requests.post('http://127.0.0.1:8000/predict', headers=headers, data=json.dumps(data))
 print (response.text)
