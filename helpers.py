@@ -19,14 +19,26 @@ config.read('settings.conf')
 
 MODEL = config['MODEL']['model']
 FEATURES = config['FEATURES']['features'].split(',')
-REGEX = '([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"'
 SPECIAL_CHARS = "[$&+,:;=?@#|'<>.^*()%!-]"
 
 
 # Encode a signle log line/Extract features
-def encode_log_line(log_line):
+def encode_log_line(log_line,log_type):
     log_line = log_line.replace(',','_')
-    log_line = re.match(REGEX,log_line).groups()
+    # log_type is apache for the moment
+    if log_type in config['LOG']:
+        log_fomat = config['LOG'][log_type]
+    else:
+        print('Log type \'{}\' not defined'.format(log_type))
+        sys.exit(1)
+    if log_fomat in [None,'']:
+        print('Log format \'{}{}\' is emtpy'.format(log_type,log_fomat))
+        sys.exit(1)
+    try:
+        log_line = re.match(log_fomat,log_line).groups()
+    except:
+        print('Something went wrong parsing the log fomrat \'{}\''.format(log_type))
+        sys.exit(0)
     # Extrating the URL
     url = log_line[2]
     # The features that are currently taken in account are the following

@@ -15,12 +15,14 @@ from helpers import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--log_file', help = 'The raw http log file', required = True)
+parser.add_argument('-t', '--log_type', help = 'apache or nginx', required = True)
 parser.add_argument('-d', '--dest_file', help = 'Destination to store the resulting csv file', required = True)
 parser.add_argument('-a', '--artificial_label', help = 'Generate an artificial label for each log line', action='store_true')
 
 args = vars(parser.parse_args())
 
 log_file = args['log_file']
+log_type = args['log_type']
 dest_file = args['dest_file']
 artificial_label = args['artificial_label']
 
@@ -32,7 +34,7 @@ def encode_log_file(log_file):
 	for log_line in log_file:
 		log_line=log_line.replace(',','#')
 		log_line=log_line.replace(';','#')
-		url,log_line_data = encode_log_line(log_line)
+		url,log_line_data = encode_log_line(log_line,log_type)
 		if log_line_data != None:
 			#data[url] = log_line_data
 			data[log_line] = log_line_data
