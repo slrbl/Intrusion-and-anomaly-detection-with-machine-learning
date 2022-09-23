@@ -82,7 +82,7 @@ def main():
     print("\nEstimated number of clusters: %d" % n_clusters)
     print("Estimated number of outliers/noise points: %d" % n_noise)
     print("DBSCAN Silhouette Coefficient: %0.3f" % metrics.silhouette_score(dataframe, labels))
-    print('{} log lines has detected as containing potential malicious behaviour traces'.format(list(labels).count(-1)))
+    print('{} log lines detected as containing potential malicious behaviour traces'.format(list(labels).count(-1)))
 
     if SHOW_PLOTS:
         # Black removed and is used for noise instead.
