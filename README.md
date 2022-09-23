@@ -18,6 +18,7 @@ Webhawk is an open source machine learning powered Web attack detection tool. It
 ```shell
 python -m venv webhawk_venv
 source webhawk_venv/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
