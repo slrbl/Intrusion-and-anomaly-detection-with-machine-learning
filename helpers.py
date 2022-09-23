@@ -19,24 +19,24 @@ FEATURES = config['FEATURES']['features'].split(',')
 SPECIAL_CHARS = set("[$&+,:;=?@#|'<>.^*()%!-]")
 
 
-# Encode a signle log line/Extract features
+# Encode a single log line/Extract features
 def encode_log_line(log_line,log_type):
     log_line = log_line.replace(',','_')
     # log_type is apache for the moment
     if log_type in config['LOG']:
-        log_fomat = config['LOG'][log_type]
+        log_format = config['LOG'][log_type]
     else:
         print('Log type \'{}\' not defined'.format(log_type))
         sys.exit(1)
-    if log_fomat in [None,'']:
-        print('Log format \'{}{}\' is emtpy'.format(log_type,log_fomat))
+    if log_format in [None,'']:
+        print('Log format \'{}{}\' is empty'.format(log_type,log_format))
         sys.exit(1)
     try:
-        log_line = re.match(log_fomat,log_line).groups()
+        log_line = re.match(log_format,log_line).groups()
     except:
-        print('Something went wrong parsing the log fomrat \'{}\''.format(log_type))
+        print('Something went wrong parsing the log format \'{}\''.format(log_type))
         sys.exit(0)
-    # Extrating the URL
+    # Extracting the URL
     url = log_line[2]
     # The features that are currently taken in account are the following
     return_code = log_line[3]

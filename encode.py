@@ -1,9 +1,9 @@
 
-# About: Artificailly generate labeled data starting form raw http log file by adding rule based tags
+# About: Artificially generate labeled data starting form raw http log file by adding rule based tags
 # Author: walid.daboubi@gmail.com
 # Version: 2.0 - 2022/08/14
 
-#	A sample of lableled data:
+#	A sample of labelled data:
 # 	url_length,params_number,return_code,label, http_query
 # 	49,1,404,1,GET /honeypot/bsidesdfw%20-%202014.ipynb HTTP/1.1
 #       Label could be 1 (attack detected) or 0 (no attack detected)
@@ -46,14 +46,14 @@ def encode_single_line(single_line,features):
     return ",".join((single_line[feature] for feature in features))
 
 
-def add_artificial_labels(data,artificial_label):
+def add_simulation_labels(data,artificial_label):
 	labelled_data_str = f"{config['FEATURES']['features']},label,log_line\n"
 	for url in data:
 		# U for unknown
 		attack_label = 'U'
 		if artificial_label:
 			attack_label = '0'
-			# Ths patterns are not exhaustive and they are here just for the simulation pupose
+			# Ths patterns are not exhaustive and they are here just for the simulation purpose
 			patterns = ('honeypot', '%3b', 'xss', 'sql', 'union', '%3c', '%3e', 'eval')
 			if any(pattern in url.lower() for pattern in patterns):
 				attack_label = '1'

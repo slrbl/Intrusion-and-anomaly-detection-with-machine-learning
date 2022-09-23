@@ -1,5 +1,5 @@
 
-# About: Use supervised learning logistic regression classifier to predict intrusion/suspecious activities in http logs
+# About: Use supervised learning logistic regression classifier to predict intrusion/suspicious activities in http logs
 # Author: walid.daboubi@gmail.com
 # Version: 2.0 - 2022/08/14
 
@@ -24,16 +24,16 @@ training_data = args['training_data']
 testing_data = args['testing_data']
 training_algorithm = args['training_algorithm']
 
-# Get training features and labeles
+# Get training features and labels
 training_features, training_labels = load_encoded_data(training_data)
 # Get testing features and labels
 testing_features, testing_labels = load_encoded_data(testing_data)
 
-# Logistic regession model
+# Logistic regression model
 if training_algorithm == 'lr':
     print("\n\n=-=-=-=-=-=-=- Logistic Regression Classifier -=-=-=-=-=-\n")
     attack_classifier = linear_model.LogisticRegression()
-# Descision tree model
+# Decision tree model
 elif training_algorithm == 'dt':
     print("\n\n=-=-=-=-=-=-=- Decision Tree Classifier -=-=-=-=-=-=-=-\n")
     attack_classifier = tree.DecisionTreeClassifier()

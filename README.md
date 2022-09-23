@@ -33,7 +33,7 @@ Please note that two already encoded data files are available in ./SAMPLE_DATA/l
 
 ### Run the unsupervised detection script
 
-Get inspired form this example:
+Get inspired from this example:
 
 ```shell
 python unsup_hawk.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5

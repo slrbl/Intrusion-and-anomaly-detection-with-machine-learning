@@ -1,4 +1,4 @@
-# About: Use unsupervised learning to detect intrusion/suspecious activities in http logs
+# About: Use unsupervised learning to detect intrusion/suspicious activities in http logs
 # Author: walid.daboubi@gmail.com
 # Version: 2.0 - 2022/08/14
 
@@ -30,8 +30,8 @@ SHOW_PLOTS = args['show_plots']
 
 
 def plot_informative(x,y,z):
-    # This is just an informationl plot to give the user an idea about how outliers can be detected
-    # 2D informationl plot
+    # This is just an informational plot to give the user an idea about how outliers can be detected
+    # 2D informational plot
     print('Plotting an informative 2 dimensional visualisation')
     plt.plot(x, y, 'ko')
     plt.title("A visualisation of 2 selected  features")
@@ -67,7 +67,7 @@ def main():
     core_samples_mask[dbscan_model.core_sample_indices_] = True
     labels = dbscan_model.labels_
 
-    # Find the nosie (outliers) lines in the log
+    # Find the noise (outliers) lines in the log
     log_line_number = 0
     for label in labels:
         if label == -1:
