@@ -19,7 +19,7 @@ app = FastAPI()
 @app.post('/predict')
 def predict(data: HttpLogQueryModel):
     datadict = data.dict()
-    _,encoded = encode_log_line(datadict['http_log_line'])
+    _,encoded = encode_log_line(datadict['http_log_line'],datadict['log_type'])
     model = pickle.load(open(MODEL, 'rb'))
     formatted_encoded = [encoded[feature] for feature in FEATURES]
     prediction = int(model.predict([formatted_encoded])[0])

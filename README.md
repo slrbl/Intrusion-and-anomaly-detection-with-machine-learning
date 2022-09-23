@@ -1,5 +1,5 @@
 
-# 🦅 Webhawk
+# 🦅 Webhawk 2.0
 
 Machine Learning based web attacks detection.
 
@@ -13,8 +13,30 @@ Webhawk is an open source machine learning powered Web attack detection tool. It
 
 ## Setup
 
+### Using a Python virtual env
+
 ```shell
-pip3 install -r requirements.txt
+python -m venv webhawk_venv
+source webhawk_venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Unsupervised detection Usage
+
+### Encode your http logs and save unsupervised detection results into a csv file
+
+```shell
+python encode.py -a -t apache -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
+```
+
+Please note that two already encoded data files are available in ./SAMPLE_DATA/labeled-encoded-data-samples/, in case you would like to move directly to the next step.
+
+### Run the unsupervised detection script
+
+Get inspired form this example:
+
+```shell
+python unsup_hawk.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5
 ```
 
 ## Create a settings.conf file
@@ -28,27 +50,9 @@ model:MODELS/the_model_you_will_train.pkl
 features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth
 ```
 
-## Unsupervised detection Usage
-
-### Encode your http logs and save the result into a csv file
-
-```shell
-python encode.py -a -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
-```
-
-Please note that two already encoded data files are available in ./SAMPLE_DATA/labeled-encoded-data-samples/, in case you would like to move directly to the next step.
-
-### Run the unsupervised detection script
-
-Get inspired from this example:
-
-```shell
-python unsupervised_detection.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5
-```
-
 ## Supervised detection Usage
 
-### Encode your http logs and save the result into a csv file
+### Encode your http logs and save supervised detection results into a csv file
 
 ```shell
 python encode.py -a -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
@@ -92,6 +96,7 @@ headers = {
     'Content-Type': 'application/json',
 }
 data = {
+    'log_type':'apache',
     'http_log_line': '187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] "GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1" 200 1279418 "http://www.secrepo.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta"'
 }
 response = requests.post('http://127.0.0.1:8000/predict', headers=headers, data=json.dumps(data))
@@ -104,9 +109,9 @@ It will return the following:
 {"prediction":"0","confidence":"0.9975490196078431","log_line":"187.167.57.27 - - [15/Dec/2018:03:48:45 -0800] \"GET /honeypot/Honeypot%20-%20Howto.pdf HTTP/1.1\" 200 1279418 \"http://www.secrepo.com/\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/61.0.3163.128 Safari/534.24 XiaoMi/MiuiBrowser/9.6.0-Beta\""}
 ```
 
-### Docker
+### Using Docker
 
-#### Launch the API server
+#### Launch the API server (with Docker)
 
 To launch the prediction server using docker
 
