@@ -5,9 +5,11 @@
 # To be launched as the following
 # python3 -m uvicorn api:app --reload --host 0.0.0.0 --port 8000
 
-from helpers import *
 from fastapi import FastAPI
 from pydantic import BaseModel
+
+from helpers import *
+
 
 class HttpLogQueryModel(BaseModel):
     http_log_line : str
@@ -15,18 +17,15 @@ class HttpLogQueryModel(BaseModel):
 app = FastAPI()
 
 @app.post('/predict')
-
 def predict(data: HttpLogQueryModel):
-    data = data.dict()
-    url,encoded = encode_log_line(data['http_log_line'],data['log_type'])
+    datadict = data.dict()
+    _,encoded = encode_log_line(datadict['http_log_line'],datadict['log_type'])
     model = pickle.load(open(MODEL, 'rb'))
-    formatted_encoded = []
-    for feature in FEATURES:
-        formatted_encoded.append(encoded[feature])
+    formatted_encoded = [encoded[feature] for feature in FEATURES]
     prediction = int(model.predict([formatted_encoded])[0])
     confidence = model.predict_confidence([formatted_encoded])[0][prediction]
     return {
         'prediction': str(prediction),
         'confidence':str(confidence),
-        'log_line':data['http_log_line']
+        'log_line':datadict['http_log_line']
     }
