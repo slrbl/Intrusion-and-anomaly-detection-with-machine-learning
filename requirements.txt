@@ -7,7 +7,7 @@ configparser==5.3.0
 fastapi==0.85.0
 h11==0.13.0
 idna==3.4
-joblib==1.1.0
+joblib==1.2.0
 matplotlib==3.6.0
 numpy==1.23.3
 pandas==1.5.0
