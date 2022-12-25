@@ -10,23 +10,15 @@ import time
 
 import pandas as pd
 
-config = configparser.ConfigParser()
-config.sections()
-config.read('settings.conf')
-
-MODEL = config['MODEL']['model']
-FEATURES = config['FEATURES']['features'].split(',')
-SPECIAL_CHARS = set("[$&+,:;=?@#|'<>.^*()%!-]")
-
 
 # Encode a single log line/Extract features
 def encode_log_line(log_line,log_type):
     log_line = log_line.replace(',','_')
     # log_type is apache for the moment
-    if log_type in config['LOG']:
+    try:
         log_format = config['LOG'][log_type]
-    else:
-        print('Log type \'{}\' not defined'.format(log_type))
+    except:
+        print('Log type \'{}\' not defined. \nMake sure "settings.conf" file exits and the log concerned type is defined.\nExiting'.format(log_type))
         sys.exit(1)
     if log_format in [None,'']:
         print('Log format \'{}{}\' is empty'.format(log_type,log_format))
@@ -86,6 +78,67 @@ def save_model(model, label):
     return model_file_name
 
 
+def encode_single_line(single_line,features):
+    return ",".join((str(single_line[feature]) for feature in features))
+
+# Encode all the data in http log file (access_log)
+def encode_log_file(log_file,log_type):
+	data = {}
+	log_file = open(log_file, 'r')
+	for log_line in log_file:
+		log_line=log_line.replace(',','#').replace(';','#')
+		_,log_line_data = encode_log_line(log_line,log_type)
+		if log_line_data is not None:
+			#data[url] = log_line_data
+			data[log_line] = log_line_data
+	return data
+
+
+def construct_enconded_data_file(data,set_simulation_label):
+	labelled_data_str = f"{config['FEATURES']['features']},label,log_line\n"
+	for url in data:
+		# U for unknown
+		attack_label = 'U'
+		if set_simulation_label==True:
+			attack_label = '0'
+			# Ths patterns are not exhaustive and they are here just for the simulation purpose
+			patterns = ('honeypot', '%3b', 'xss', 'sql', 'union', '%3c', '%3e', 'eval')
+			if any(pattern in url.lower() for pattern in patterns):
+				attack_label = '1'
+		labelled_data_str += f"{encode_single_line(data[url],FEATURES)},{attack_label},{url}"
+	return len(data),labelled_data_str
+
+
+def save_encoded_data(labelled_data_str,dest_file,data_size):
+    print(labelled_data_str)
+    with  open(dest_file, 'w') as encoded_data_file:
+        encoded_data_file.write(labelled_data_str)
+    print('{} rows have successfully saved to {}'.format(data_size,dest_file))
+
+
 def load_model(model_file):
     model = pickle.dump(model_file)
     return model
+
+
+config = configparser.ConfigParser()
+config.sections()
+config.read('settings.conf')
+
+
+try:
+    MODEL = config['MODEL']['model']
+except:
+    print('No model defined. Make sure the file "settings.conf" exists and a model is defined')
+    print('Continuing..')
+
+
+try:
+    FEATURES = config['FEATURES']['features'].split(',')
+except:
+    print('No features defined. Make sure the file "settings.conf" exists and training/prediction features are defined.')
+    print('Exiting..')
+    sys.exit(1)
+
+
+SPECIAL_CHARS = set("[$&+,:;=?@#|'<>.^*()%!-]")

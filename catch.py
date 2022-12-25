@@ -1,32 +1,24 @@
 # About: Use unsupervised learning to detect intrusion/suspicious activities in http logs
 # Author: walid.daboubi@gmail.com
-# Version: 2.0 - 2022/08/14
+# Version: 3.0 - 2022/12/25
 
 import argparse
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn import metrics
 from sklearn.cluster import DBSCAN
+from io import StringIO
 
-from helpers import *
+from utilities import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-l', '--encoded_logs_file', help='The file containing the encoded logs', required=True)
+parser.add_argument('-l', '--log_file', help = 'The raw http log file', required = True)
+parser.add_argument('-t', '--log_type', help = 'apache or nginx', required = True)
 parser.add_argument('-e', '--eps', help='Max distance between two points. The default value is 500', required=False)
 parser.add_argument('-s', '--min_samples', help='Minimum number of points with the same cluster. The default value is 2', required=False)
 parser.add_argument('-j', '--log_lines_limit', help='The maximum number of log lines of consider. The default value is 5000', required=False)
 parser.add_argument('-v', '--show_plots', help='Show plots',  action='store_true')
-
-# Get parameters
-args = vars(parser.parse_args())
-
-ENCODED_LOG_FILE = args['encoded_logs_file']
-LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] is not None else 5000
-EPS = float(args['eps']) if args['eps'] is not None else 500
-MIN_SAMPLES = int(args['min_samples']) if args['min_samples'] is not None else 2
-SHOW_PLOTS = args['show_plots']
 
 
 def plot_informative(x,y,z):
@@ -48,13 +40,29 @@ def plot_informative(x,y,z):
 
 
 def main():
+
+    # Get parameters
+    args = vars(parser.parse_args())
+
+    # Encode raw data file and save encoded data
+    print('> Webhawk 2.0')
+    print("Encoding data..")
+    _,data_str = construct_enconded_data_file(encode_log_file(args['log_file'],args['log_type']),False)
+
+    LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] is not None else 5000
+    EPS = float(args['eps']) if args['eps'] is not None else 500
+    MIN_SAMPLES = int(args['min_samples']) if args['min_samples'] is not None else 2
+    SHOW_PLOTS = args['show_plots']
+
+
     # Get the raw log lines
-    data = pd.read_csv(ENCODED_LOG_FILE).head(LOG_SIZE_LIMIT)
+    csvStringIO = StringIO(data_str)
+    data = pd.read_csv(csvStringIO, sep=",").head(LOG_SIZE_LIMIT)
+
+
     # convert to a dataframe
     # features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth
     dataframe = data.to_numpy()[:,list(range(0,8))]
-
-    print('> Webhawk 2.0')
 
     if SHOW_PLOTS:
         print('Plotting size, special_chars and url_depth')

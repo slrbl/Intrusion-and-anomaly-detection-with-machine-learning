@@ -22,25 +22,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-## Unsupervised detection Usage
-
-### Encode your http logs and save unsupervised detection results into a csv file
-
-```shell
-python encode.py -a -t apache -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -d ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv
-```
-
-Please note that two already encoded data files are available in ./SAMPLE_DATA/labeled-encoded-data-samples/, in case you would like to move directly to the next step.
-
-### Run the unsupervised detection script
-
-Get inspired from this example:
-
-```shell
-python unsup_hawk.py -l ./SAMPLE_DATA/labeled-encoded-data-samples/aug_sep_oct_2021.csv -j 50000 -v -e 5000 -s 5
-```
-
-## Create a settings.conf file
+### Create a settings.conf file
 
 Copy settings_template.conf file to settings.conf and fill it with the required parameters as the following.
 
@@ -49,6 +31,20 @@ Copy settings_template.conf file to settings.conf and fill it with the required 
 model:MODELS/the_model_you_will_train.pkl
 [FEATURES]
 features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth
+```
+
+## Unsupervised detection Usage
+
+### Encode your http logs and save unsupervised detection results into a csv file
+
+Nothing to do as encoding is automatic for the unsupervised detection mode.
+
+### Run the unsupervised detection script
+
+Get inspired from this example:
+
+```shell
+python catch.py -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -t apache -j 10000 -v -e 5000 -s 5
 ```
 
 ## Supervised detection Usage

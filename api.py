@@ -8,7 +8,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from helpers import *
+from utilities import *
 
 
 class HttpLogQueryModel(BaseModel):

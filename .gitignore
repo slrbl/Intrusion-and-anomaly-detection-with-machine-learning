@@ -2,6 +2,7 @@ MODELS/*.pkl
 *.DS_Store
 settings.conf
 webhawk_venv/
+SAMPLE_DATA/labeled-encoded-data-samples/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

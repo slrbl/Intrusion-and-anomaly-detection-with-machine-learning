@@ -8,7 +8,7 @@ import sys
 
 from sklearn import linear_model, tree
 
-from helpers import *
+from utilities import *
 
 
 def get_args():

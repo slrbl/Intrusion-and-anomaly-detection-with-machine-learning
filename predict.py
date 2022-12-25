@@ -5,7 +5,7 @@
 import argparse
 import pickle
 
-from helpers import *
+from utilities import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--log_line', help = 'The log line you want to assess', required = True)
