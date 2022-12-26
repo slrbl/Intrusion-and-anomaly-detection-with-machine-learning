@@ -35,12 +35,9 @@ features:length,params_number,return_code,size,upper_cases,lower_cases,special_c
 
 ## Unsupervised detection Usage
 
-### Encode your http logs and save unsupervised detection results into a csv file
-
-Nothing to do as encoding is automatic for the unsupervised detection mode.
-
 ### Run the unsupervised detection script
 
+Encoding is automatic for the unsupervised mode. You just need to run the catch.py script.
 Get inspired from this example:
 
 ```shell
