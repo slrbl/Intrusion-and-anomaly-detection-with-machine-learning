@@ -17,7 +17,7 @@ parser.add_argument('-l', '--log_file', help = 'The raw http log file', required
 parser.add_argument('-t', '--log_type', help = 'apache or nginx', required = True)
 parser.add_argument('-e', '--eps', help='Max distance between two points. The default value is 500', required=False)
 parser.add_argument('-s', '--min_samples', help='Minimum number of points with the same cluster. The default value is 2', required=False)
-parser.add_argument('-j', '--log_lines_limit', help='The maximum number of log lines of consider. The default value is 5000', required=False)
+parser.add_argument('-j', '--log_lines_limit', help='The maximum number of log lines of consider', required=False)
 parser.add_argument('-p', '--show_plots', help='Show informative plots',  action='store_true')
 
 
@@ -57,7 +57,7 @@ def main():
     print('> Webhawk 2.0')
     print("Encoding data..")
 
-    LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] is not None else 5000
+    LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] is not None else 1000000
     EPS = float(args['eps']) if args['eps'] is not None else 500
     MIN_SAMPLES = int(args['min_samples']) if args['min_samples'] is not None else 2
     SHOW_PLOTS = args['show_plots']
@@ -93,7 +93,7 @@ def main():
     n_noise = list(labels).count(-1)
 
     print("\nEstimated number of clusters: %d" % n_clusters)
-    print("Estimated number of outliers/noise points: %d" % n_noise)
+    print("Estimated number of outliers/anomalous points: %d" % n_noise)
     print("DBSCAN Silhouette Coefficient: %0.3f" % metrics.silhouette_score(dataframe, labels))
     print('{} log lines detected as containing potential malicious behaviour traces'.format(list(labels).count(-1)))
 
