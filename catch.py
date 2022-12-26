@@ -18,7 +18,7 @@ parser.add_argument('-t', '--log_type', help = 'apache or nginx', required = Tru
 parser.add_argument('-e', '--eps', help='Max distance between two points. The default value is 500', required=False)
 parser.add_argument('-s', '--min_samples', help='Minimum number of points with the same cluster. The default value is 2', required=False)
 parser.add_argument('-j', '--log_lines_limit', help='The maximum number of log lines of consider. The default value is 5000', required=False)
-parser.add_argument('-v', '--show_plots', help='Show plots',  action='store_true')
+parser.add_argument('-p', '--show_plots', help='Show informative plots',  action='store_true')
 
 
 def plot_informative(x,y,z):
@@ -59,14 +59,17 @@ def main():
     csvStringIO = StringIO(data_str)
     data = pd.read_csv(csvStringIO, sep=",").head(LOG_SIZE_LIMIT)
 
+    used_features = ['params_number','length','upper_cases','lower_cases','special_chars','url_depth','log_line']
+
+    data=data[used_features]
 
     # convert to a dataframe
     # features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth
-    dataframe = data.to_numpy()[:,list(range(0,8))]
+    dataframe = data.to_numpy()[:,list(range(0,len(used_features)-1))]
 
     if SHOW_PLOTS:
         print('Plotting size, special_chars and url_depth')
-        plot_informative(data['size'], data['special_chars'], data['url_depth'])
+        plot_informative(data['params_number'], data['special_chars'], data['url_depth'])
 
     print('Starting detection..')
     # Use dbscan for clustering
