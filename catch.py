@@ -39,6 +39,15 @@ def plot_informative(x,y,z):
     plt.show()
 
 
+def get_data(log_file,log_type,log_size_limit,selected_features):
+    _,data_str = construct_enconded_data_file(encode_log_file(log_file,log_type),False)
+    # Get the raw log lines
+    csvStringIO = StringIO(data_str)
+    data = pd.read_csv(csvStringIO, sep=",").head(log_size_limit)
+    data = data[selected_features]
+    return data
+
+
 def main():
 
     # Get parameters
@@ -47,25 +56,18 @@ def main():
     # Encode raw data file and save encoded data
     print('> Webhawk 2.0')
     print("Encoding data..")
-    _,data_str = construct_enconded_data_file(encode_log_file(args['log_file'],args['log_type']),False)
 
     LOG_SIZE_LIMIT = int(args['log_lines_limit']) if args['log_lines_limit'] is not None else 5000
     EPS = float(args['eps']) if args['eps'] is not None else 500
     MIN_SAMPLES = int(args['min_samples']) if args['min_samples'] is not None else 2
     SHOW_PLOTS = args['show_plots']
 
+    selected_features=['params_number','length','upper_cases','lower_cases','special_chars','url_depth','log_line']
 
-    # Get the raw log lines
-    csvStringIO = StringIO(data_str)
-    data = pd.read_csv(csvStringIO, sep=",").head(LOG_SIZE_LIMIT)
-
-    used_features = ['params_number','length','upper_cases','lower_cases','special_chars','url_depth','log_line']
-
-    data=data[used_features]
+    data=get_data(args['log_file'],args['log_type'],LOG_SIZE_LIMIT,selected_features)
 
     # convert to a dataframe
-    # features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth
-    dataframe = data.to_numpy()[:,list(range(0,len(used_features)-1))]
+    dataframe = data.to_numpy()[:,list(range(0,len(selected_features)-1))]
 
     if SHOW_PLOTS:
         print('Plotting size, special_chars and url_depth')
