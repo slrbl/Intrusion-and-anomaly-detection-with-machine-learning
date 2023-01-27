@@ -119,16 +119,29 @@ docker compose up
 The data you will find in SAMPLE_DATA folder comes from<br>
 https://www.secrepo.com.
 
+## Interesting data samples
+
+https://www.kaggle.com/datasets/eliasdabbas/web-server-access-logs
+https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/3QBYB5
+
 ## Documentation
 
-Details on how this tool is built could be found at<br>
+Details on how this tool is built could be found at
 http://enigmater.blogspot.fr/2017/03/intrusion-detection-based-on-supervised.html
 
-## Todo
+## TODO
+Nothing for now.
 
-To extract/add more features (Eg: hour of the day, day of the week, week, month).
-<br>To find a better way to label training data
-<br>To add the possibility to use unsupervised learning.
+## Reference
+
+Silhouette Effeciency
+<br>https://bioinformatics-training.github.io/intro-machine-learning-2017/clustering.html
+
+<br>Optimal Value of Epsilon
+<br>https://towardsdatascience.com/machine-learning-clustering-dbscan-determine-the-optimal-value-for-epsilon-eps-python-example-3100091cfbc
+
+<br>Max curvature point
+<br>https://towardsdatascience.com/detecting-knee-elbow-points-in-a-graph-d13fc517a63c
 
 ## Contribution
 

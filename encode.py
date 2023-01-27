@@ -28,5 +28,5 @@ log_type = args['log_type']
 dest_file = args['dest_file']
 generate_artificial_label = args['generate_artificial_label']
 
-data_size,labelled_data_str = construct_enconded_data_file(encode_log_file(log_file,log_type),generate_artificial_label)
+data_size,labelled_data_str = construct_enconded_data_file(encode_log_file(log_file,log_type,smooth=False),generate_artificial_label)
 save_encoded_data(labelled_data_str,dest_file,data_size)
