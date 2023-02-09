@@ -1,7 +1,7 @@
 
 # 🦅 Webhawk 2.0
 
-<span style="color:red">https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch</span>
+<span style="color:red">The unsupervised Webhawk is now available as independent projet. Check it out at https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch.</span>
 
 Machine Learning based web attacks detection.
 
