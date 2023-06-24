@@ -201,9 +201,6 @@ def main():
         'lower_cases',
         'special_chars',
         'url_depth',
-        'user_agent',
-        'http_query',
-        'ip',
         'return_code',
         'log_line',
         ]
@@ -265,7 +262,7 @@ def main():
         logging.info('{}{}'.format(4*' ', best_eps_for_silouhette))
         selected_eps = best_eps_for_silouhette
 
-    logging.info('{}The value {} will be used as final DBSCAN Epsilon'.format(4*' ', selected_eps))
+    # logging.info('{}The value {} will be used as final DBSCAN Epsilon'.format(4*' ', selected_eps))
 
     logging.info('\n> Starting detection..')
     # Use dbscan for clustering and train the model
