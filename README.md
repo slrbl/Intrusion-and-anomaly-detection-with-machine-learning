@@ -44,7 +44,7 @@ Encoding is automatic for the unsupervised mode. You just need to run the catch.
 Get inspired from this example:
 
 ```shell
-python catch.py -l ./SAMPLE_DATA/raw-http-logs-samples/aug_sep_oct_2021.log -t apache -j 10000 -v -e 5000 -s 5
+python catch.py -l ./SAMPLE_DATA/raw-http-logs-samples/may_oct_2022.log -t apache -j 10000 -s 5
 ```
 
 ## Supervised detection Usage
@@ -68,7 +68,7 @@ python train.py -a 'dt' -t ./SAMPLE_DATA/labeled-encoded-data-samples/may_jun_ju
 ### Make a prediction for a single log line
 
 ```shell
-python predict.py -m 'MODELS/the_model_you_will_train.pkl' -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /self.logs/access.log.2016-07-20.gz HTTP/1.1" 404 340 "-" "python-requests/2.18.4"'
+python predict.py -m 'MODELS/the_model_you_will_train.pkl' -t 'apache' -l '198.72.227.213 - - [16/Dec/2018:00:39:22 -0800] "GET /self.logs/access.log.2016-07-20.gz HTTP/1.1" 404 340 "-" "python-requests/2.18.4"'
 ```
 
 ### REST API

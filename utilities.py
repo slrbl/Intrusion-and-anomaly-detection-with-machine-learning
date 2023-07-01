@@ -63,9 +63,9 @@ def encode_log_line(log_line,log_type,indices):
         log_line_data['lower_cases'] = lower_cases
         log_line_data['special_chars'] = special_chars
         log_line_data['url_depth'] = float(url_depth)
-        log_line_data['ip'] = indices['ips'].index(ip)+1
-        log_line_data['http_query'] = 100*(indices['http_queries'].index(http_query)+1)
-        log_line_data['user_agent'] = indices['user_agents'].index(user_agent)+1
+        # log_line_data['ip'] = indices['ips'].index(ip)+1
+        # log_line_data['http_query'] = 100*(indices['http_queries'].index(http_query)+1)
+        # log_line_data['user_agent'] = indices['user_agents'].index(user_agent)+1
     else:
         log_line_data = None
     return url, log_line_data

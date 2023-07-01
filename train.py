@@ -15,7 +15,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--training_data', help = 'Training data', required = True)
     parser.add_argument('-v', '--testing_data', help = 'Testing data', required = True)
-    parser.add_argument('-a', '--training_algorithm', help = '"lr" for logistic regression or "dr" for decision tree', required = True)
+    parser.add_argument('-a', '--training_algorithm', help = '"lr" for logistic regression or "dt" for decision tree', required = True)
     return vars(parser.parse_args())
 
 args = get_args()
@@ -47,7 +47,7 @@ try:
     predictions = attack_classifier.predict(testing_features)
     print("The precision of the detection model is: " + str(get_accuracy(testing_labels,predictions, 1)) + " %")
     # Save the trained classifier
-    model_location = save_model(attack_classifier,'lr')
+    model_location = save_model(attack_classifier, training_algorithm)
     print("You model has been saved at {}".format(model_location))
 except Exception as e:
     print('Something went wrong training the model.\nExiting.', e)
