@@ -1,0 +1,13 @@
+MODELS/*.pkl
+*.DS_Store
+settings.conf
+webhawk_venv/*
+
+__pycache__/*
+
+SAMPLE_DATA/RAW_APACHE_LOGS/*
+!SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2021-10-22
+!SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2022-12-22
+
+SCANS/*
+!SCANS/.keep
