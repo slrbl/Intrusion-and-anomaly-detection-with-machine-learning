@@ -1,5 +1,5 @@
 
-# Webhawk/Catch 2.0
+# Webhawk/Catch 3.0
 
 Unsupervised Machine Learning web attacks detection.
 
