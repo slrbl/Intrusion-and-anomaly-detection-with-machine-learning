@@ -112,7 +112,7 @@ python catch.py -l SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2021-10-22 --log_type 
 The output of this command is:
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch/blob/master/IMAGES/screenshot_1.png">
+  <img width="100%" src="https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch/blob/master/IMAGES/screenshot_2.png">
 </p>
 
 <p align="center">  
