@@ -12,7 +12,9 @@ idna==3.10
 joblib==1.5.1
 kiwisolver==1.4.8
 kneed==0.8.5
+markdown-it-py==3.0.0
 matplotlib==3.10.3
+mdurl==0.1.2
 numpy==2.2.6
 packaging==25.0
 pandas==2.2.3
@@ -21,10 +23,12 @@ psutil==7.0.0
 pydantic==2.11.5
 pydantic_core==2.33.2
 pyfiglet==1.0.2
+Pygments==2.19.1
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 pytz==2025.2
 requests==2.32.3
+rich==14.0.0
 scikit-learn==1.6.1
 scipy==1.15.3
 setuptools==80.9.0
