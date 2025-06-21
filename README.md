@@ -69,23 +69,23 @@ prompt:a prompt of yout choice to check the log line
 ### Catch.py script
 
 ```shell
-python catch.py -h 
-usage: catch.py [-h] -l LOG_FILE -t LOG_TYPE [-e EPS] [-s MIN_SAMPLES] [-j LOG_LINES_LIMIT] [-y OPT_LAMDA] [-m MINORITY_THRESHOLD] [-p] [-o] [-r] [-z] [-b] [-c] [-v]
+python catch.py -h
+usage: catch.py [-h] -l LOG_FILE -t LOG_TYPE [-e EPS] [-s MIN_SAMPLES] [-j LOG_LINES_LIMIT] [-y OPT_LAMDA] [-m MINORITY_THRESHOLD] [-p] [-o] [-r] [-z] [-b] [-c] [-v] [-a] [-q]
 
 options:
   -h, --help            show this help message and exit
-  -l LOG_FILE, --log_file LOG_FILE
+  -l, --log_file LOG_FILE
                         The raw log file
-  -t LOG_TYPE, --log_type LOG_TYPE
+  -t, --log_type LOG_TYPE
                         apache, http, nginx or os_processes
-  -e EPS, --eps EPS     DBSCAN Epsilon value (Max distance between two points)
-  -s MIN_SAMPLES, --min_samples MIN_SAMPLES
+  -e, --eps EPS         DBSCAN Epsilon value (Max distance between two points)
+  -s, --min_samples MIN_SAMPLES
                         Minimum number of points with the same cluster. The default value is 2
-  -j LOG_LINES_LIMIT, --log_lines_limit LOG_LINES_LIMIT
+  -j, --log_lines_limit LOG_LINES_LIMIT
                         The maximum number of log lines of consider
-  -y OPT_LAMDA, --opt_lamda OPT_LAMDA
+  -y, --opt_lamda OPT_LAMDA
                         Optimization lambda step
-  -m MINORITY_THRESHOLD, --minority_threshold MINORITY_THRESHOLD
+  -m, --minority_threshold MINORITY_THRESHOLD
                         Minority clusters threshold
   -p, --show_plots      Show informative plots
   -o, --standardize_data
@@ -95,7 +95,8 @@ options:
   -b, --debug           Activate debug logging
   -c, --label_encoding  Use label encoding instead of frequeny encoding to encode categorical features
   -v, --find_cves       Find the CVE(s) that are related to the attack traces
-
+  -a, --get_ai_advice   Get AI advice on the detection
+  -q, --quick_scan      Only most critical detection (no minority clusters)
 ```
 
 
