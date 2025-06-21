@@ -185,5 +185,4 @@ Silhouette Effeciency
 
 ## Contribution
 
-All feedbacks, testing and contribution are very welcome!
-If you would like to contribute, fork the project, add your contribution and make a pull request.
+All feedback, testing, and contributions are very welcome! If you would like to contribute, fork the project, add your changes, and submit a pull request.
