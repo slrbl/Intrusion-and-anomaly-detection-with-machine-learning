@@ -1,0 +1,26 @@
+[FEATURES]
+features:length,params_number,return_code,size,upper_cases,lower_cases,special_chars,url_depth,user_agent,http_query,ip
+
+[LOG]
+apache_regex:([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (.+) "(.*?)" "(.*?)"
+apache_names:["ip","date","query","code","size","referrer","user_agent"]
+
+nginx_regex:([(\d\.)]+) - - \[(.*?)\] "(.*?)" (\d+) (\d+) (.+) "(.*?)" "(.*?)"
+nginx_names:["ip","date","query","code","size","referrer","user_agent"]
+
+http_regex:^(\d*?\.\d*?)\t.*?\t(.*?)\t.*?\t.*?\t.*?\t.*?\t(.*?\t.*?\t.*?\t.*?)\t(.*?)\t.*?\t(.*?)\t(.*?)\t.*$
+http_names:["date","ip","query","user_agent","size","code"]
+
+apache_error:
+nginx_error:
+
+[PROCESS_DETAILS]
+attributes:['status', 'num_ctx_switches', 'memory_full_info', 'connections', 'cmdline', 'create_time', 'num_fds', 'cpu_percent', 'terminal', 'ppid', 'cwd', 'nice', 'username', 'cpu_times', 'memory_info', 'threads', 'open_files', 'name', 'num_threads', 'exe', 'uids', 'gids', 'memory_percent', 'environ']
+
+[CVE]
+year_threshold:YYYY
+
+[LLM]
+url:http://localhost:11434/api/generate
+model:llama3.2
+prompt:Analyze this web log line for malicious activity. Provide a brief one pragraph (less than 60 words) as a response. Indidate if there is a known related attack or vulnerability. Do not start with 'This log line'
