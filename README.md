@@ -116,11 +116,11 @@ The output of this command is:
 </p>
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure1.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure_1.png">
 </p>
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure2.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure_2.png">
 </p>
 
 <p align="center">  
