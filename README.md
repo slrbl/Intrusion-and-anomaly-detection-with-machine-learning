@@ -160,7 +160,7 @@ At this point the API can be used as mentioned above.
 
 ## Used sample data
 
-The data you will find in SAMPLE_DATA folder comes from<br>
+The data you will find in ./SAMPLE_DATA folder comes from<br>
 https://www.secrepo.com.
 
 ## Interesting data samples
