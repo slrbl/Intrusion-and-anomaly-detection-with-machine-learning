@@ -150,6 +150,14 @@ response=requests.post("http://127.0.0.1:8000/scan",json=params)
 print(response.json())
 ```
 
+## Deployment using Docker 
+Webhawk can be as webservice using Docker as the following:
+```shell
+docker compose build
+docker compose up
+```
+At this point the API can be used as mentioned above.
+
 ## Used sample data
 
 The data you will find in SAMPLE_DATA folder comes from<br>
@@ -163,14 +171,6 @@ https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/3QBYB5
 
 ## TODO
 Nothing for now.
-
-
-Get AI recommendation using ollama 
-curl -s http://localhost:11434/api/generate -d '{
-  "model": "deepseek-r1:1.5b",
-  "prompt": "analyse this line of log to check if it is malicious in maximum 2 phrases 125.78.229.99 - - [22/Oct/2021:12:27:06 -0700] GET /uploads/dede/sys_verifies.php?action=getfiles&refiles%5B0%5D=123&refiles%5B1%5D=%5C%22#eval($_POST%5Bysy%5D)#die()#// HTTP/1.1 418 746 http://www.secrepo.com/uploads/dede/sys_verifies.php?action=getfiles&refiles[0]=123&refiles[1]=\\%22#eval($_POST[ysy])#die()#// Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)",
-  "stream": false,"think":false
-}'
 
 
 ## Reference
