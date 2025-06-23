@@ -106,22 +106,27 @@ Encoding is automatic for the unsupervised mode. You just need to run the catch.
 Get inspired from this example:
 
 ```shell
-python catch.py -l SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2021-10-22 --log_type apache --show_plots --standardize_data --report
+python catch.py -l ./SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2022-12-22 --log_type apache --standardize_data --report --find_cves --get_ai_advice
 ```
 
 The output of this command is:
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/screenshot_2.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/execution_screeshot.png">
 </p>
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/clusters_1.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure1.png">
 </p>
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/clusters_2.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure2.png">
 </p>
+
+<p align="center">  
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/report_screenshot.png">
+</p>
+
 
 ### Example with OS processes
 Before running the catch.py, you need to generate a .txt file containing the OS process statistics by taking advantage of top command:
