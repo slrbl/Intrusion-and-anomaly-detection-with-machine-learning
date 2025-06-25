@@ -514,7 +514,7 @@ def main():
         logging.info('No minority clusters found, or you selected a quick scan')
 
     #where to save the plot
-    save_plot_at ='./SCANS/scan_plot_{}'.format(args['log_file'].split('/')[-1].replace('.','_'))
+    save_plot_at ='./REPORTS/scan_plot_{}'.format(args['log_file'].split('/')[-1].replace('.','_'))
 
     # plot findings and save the plot if save_plot_at is defined
     plot_findings(dataframe,labels,save_plot_at)
