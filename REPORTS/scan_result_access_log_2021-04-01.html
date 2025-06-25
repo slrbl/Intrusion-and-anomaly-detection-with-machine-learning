@@ -1,0 +1,149 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 23/06/25 at 09:53:01 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2021-04-01
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 12</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2021-04-01.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>262</td>
+                    <td>The log line appears to indicate a legitimate request for a honeypot file, as the User-Agent identifies the client as Microsoft Office Word 2014. There is no obvious indication of malicious activity, but it's essential to monitor this IP address and honeypot files for unusual patterns or signs of evasion techniques.</td>
+                    <td style="word-break: break-word; white-space: normal;">78.96.218.211 - - [01/Apr/2021:06:22:28 -0700] "HEAD /honeypot/honeypot.json.zip HTTP/1.1" 200 395 "-" "Microsoft Office Word 2014" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>269</td>
+                    <td>The log line indicates a potential malware download attempt, as the user agent string suggests an outdated and vulnerable browser version (MSIE 9). This is similar to the known attack of 'Shodan' worm that exploited outdated browsers in 2005. The GET request for a non-existent file may also indicate malicious activity.</td>
+                    <td style="word-break: break-word; white-space: normal;">23.19.70.148 - - [01/Apr/2021:06:31:38 -0700] "GET /info/1017/1220.htm HTTP/1.1" 404 328 "http://www.baidu.com" "Mozilla/4.0 (compatible# MSIE 9.0# Windows NT 6.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>273</td>
+                    <td>The log line indicates a potential malicious activity, as it shows a legitimate website (Baidu) being used to host a compromised webpage (info/1020/1183.htm). This is similar to the 'Clickjacking' attack, where a user is tricked into clicking on an invisible button due to CSS positioning.</td>
+                    <td style="word-break: break-word; white-space: normal;">23.19.70.148 - - [01/Apr/2021:06:36:08 -0700] "GET /info/1020/1183.htm HTTP/1.1" 404 328 "http://www.baidu.com" "Mozilla/4.0 (compatible# MSIE 9.0# Windows NT 6.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>282</td>
+                    <td>The log line indicates a possible phishing or drive-by download attack, as the user is attempting to access a publicly available webpage (https://hackertarget.com/) with suspiciously large HTTP headers, which could be used to deliver malware. A related known vulnerability is the 'HTTP Header Poisoning' exploit, where an attacker manipulates HTTP headers to compromise a system.</td>
+                    <td style="word-break: break-word; white-space: normal;">45.115.89.44 - - [01/Apr/2021:06:40:58 -0700] "GET /https://hackertarget.com/500k-http-headers/ HTTP/1.1" 404 250 "-" "Mozilla/5.0 (compatible# MSIE 9.0# Windows NT 6.1# Trident/5.0)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>296</td>
+                    <td>The log line appears to be a legitimate request for a .zip file, but the unusual Unicode character "\xd0\xc2\xbd\xa8\xce\xc4\xbc\xfe\xbc" suggests potential malicious activity. A known related attack is the "Zip Bomb" vulnerability, which exploits large ZIP archives to crash systems.</td>
+                    <td style="word-break: break-word; white-space: normal;">39.128.133.163 - - [01/Apr/2021:07:01:13 -0700] "HEAD /\xd0\xc2\xbd\xa8\xce\xc4\xbc\xfe\xbc\xd0.zip HTTP/1.1" 404 265 "-" "Mozilla/4.0 (compatible# MSIE 8.0# Windows NT 6.1# Trident/4.0)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>368</td>
+                    <td>The log line indicates a potential Cross-Site Scripting (XSS) attack, as the incoming request is trying to access a configuration file on the server, which could be exploited by an attacker to inject malicious scripts. Related known vulnerability: CVE-2014-3555, an ASP .NET vulnerability that allows XSS attacks if the config file is not properly sanitized.</td>
+                    <td style="word-break: break-word; white-space: normal;">139.211.194.35 - - [01/Apr/2021:08:08:36 -0700] "POST /config/AspCms_Config.asp HTTP/1.1" 404 305 "http://www.secrepo.com/config/AspCms_Config.asp" "Mozilla/4.0 (compatible# MSIE 9.0# Windows NT 6.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>369</td>
+                    <td>The log line indicates a potential phishing attempt, as it contains a suspicious POST request to a PHP script with a potentially malicious URL. This could be related to the "HTTP Response Splitting" vulnerability (CVE-2013-0158), which allows an attacker to inject malicious content in HTTP responses.</td>
+                    <td style="word-break: break-word; white-space: normal;">139.211.194.35 - - [01/Apr/2021:08:08:36 -0700] "POST /plus/mytag_js.php?aid=511348 HTTP/1.1" 418 746 "http://www.secrepo.com/plus/mytag_js.php?aid=511348" "Mozilla/4.0 (compatible# MSIE 9.0# Windows NT 6.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br></td>
+                    <td>370</td>
+                    <td>The log line indicates a potential phishing attempt, as the request is for a malicious PHP script and the user agent is spoofing Microsoft Internet Explorer 9. This behavior is similar to the "MyTag" exploit (also known as the "MyTag Script" vulnerability), where attackers inject malicious scripts through legitimate web pages.</td>
+                    <td style="word-break: break-word; white-space: normal;">139.211.194.35 - - [01/Apr/2021:08:08:36 -0700] "POST /plus/mytag_js.php?aid=511348 HTTP/1.1" 404 305 "http://www.secrepo.com/plus/mytag_js.php?aid=511348" "Mozilla/4.0 (compatible# MSIE 9.0# Windows NT 6.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br></td>
+                    <td>371</td>
+                    <td>The log line indicates a potential SQL injection attempt, as the request URL contains a suspicious `aid` parameter. The presence of an old browser version (MSIE 9) and outdated system (Windows NT 6.1) raises concerns about the attacker's intent. This pattern is similar to known attacks related to vulnerabilities in older PHP versions, such as CVE-2012-0157.</td>
+                    <td style="word-break: break-word; white-space: normal;">139.211.194.35 - - [01/Apr/2021:08:08:37 -0700] "POST /plus/mytag_js.php?aid=511348 HTTP/1.1" 418 746 "http://www.secrepo.com/plus/mytag_js.php?aid=511348" "Mozilla/4.0 (compatible# MSIE 9.0# Windows NT 6.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>606</td>
+                    <td>The IP address 13.56.115.176 is associated with a known malicious botnet, specifically the Mirai malware campaign. This indicates potential malicious activity, such as distributed denial-of-service (DDoS) attacks or botnet command and control (C2) traffic, targeting the server with this log line.</td>
+                    <td style="word-break: break-word; white-space: normal;">13.56.115.176 - - [01/Apr/2021:13:33:57 -0700] "POST / HTTP/1.1" 200 12882 "-" "IDBTE4M CODE87" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>15124</td>
+                    <td>The log line appears to be a web request from an IP address (81.71.101.188) making a HEAD request to the compromised website "http://www.secrepo.com/. The User-Agent string suggests a potential bot or scraper, and the timestamp indicates recent activity (01/Apr/2021). Known related attack: Baidu crawl scraping.</td>
+                    <td style="word-break: break-word; white-space: normal;">81.71.101.188 - - [01/Apr/2021:23:28:20 -0700] "HEAD / HTTP/1.1" 200 396 "http://www.secrepo.com/" "Mozilla/5.0 (compatible# Baiduspider/2.0# +http://www.baidu.com/search/spider.html" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>15125</td>
+                    <td>The log line indicates a potential phishing or malware attack, as it involves a GET request to an index.php file with suspicious parameters. The IP address and user agent string suggest a botnet or automated script attempting to exploit vulnerabilities. Related known attacks include the "Wiggle" vulnerability (CVE-2012-1827) affecting PHP-based installations.</td>
+                    <td style="word-break: break-word; white-space: normal;">81.71.101.188 - - [01/Apr/2021:23:28:20 -0700] "GET //e/install/index.php?enews=path&f=3 HTTP/1.1" 404 250 "http://www.secrepo.com//e/install/index.php?enews=path&f=3" "Mozilla/5.0 (compatible# Baiduspider/2.0# +http://www.baidu.com/search/spider.html" </td>
+                </tr>
+            </table></div>

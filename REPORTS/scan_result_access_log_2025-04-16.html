@@ -1,0 +1,85 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 03/06/25 at 08:55:38 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2025-04-16
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 4</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-04-16.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2009-3890'>CVE-2009-3890</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-6811'>CVE-2008-6811</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-3362'>CVE-2008-3362</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2757'>CVE-2007-2757</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4743'>CVE-2006-4743</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-3390'>CVE-2006-3390</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2667'>CVE-2006-2667</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-4463'>CVE-2005-4463</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-1688'>CVE-2005-1688</a><br></td>
+                    <td>78</td>
+                    <td>This log line does not indicate malicious activity. It appears to be a legitimate web request from a user's browser, specifically trying to load a non-existent page on a WordPress plugin (Revslider). The request is coming from a Windows machine using Chrome, with no suspicious headers or content.</td>
+                    <td style="word-break: break-word; white-space: normal;">180.149.231.44 - - [16/Apr/2025:04:08:28 -0700] "GET /wp-content/plugins/revslider/includes/external/page/index.php HTTP/1.1" 404 284 "-" "Mozilla/5.0 (Windows NT 10.0# Win64# x64) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/70.0.3538.110 Safari/537.36" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-7271'>CVE-2008-7271</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2009-3730'>CVE-2009-3730</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5427'>CVE-2007-5427</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-4187'>CVE-2007-4187</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-3987'>CVE-2007-3987</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-1872'>CVE-2007-1872</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-0373'>CVE-2007-0373</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2956'>CVE-2006-2956</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-1532'>CVE-2006-1532</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-1224'>CVE-2005-1224</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-0802'>CVE-2005-0802</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2004-2561'>CVE-2004-2561</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2004-2108'>CVE-2004-2108</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2004-1845'>CVE-2004-1845</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2004-1555'>CVE-2004-1555</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2003-1211'>CVE-2003-1211</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2003-0492'>CVE-2003-0492</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-1999-0449'>CVE-1999-0449</a><br></td>
+                    <td>104</td>
+                    <td>This log line indicates a potential phishing attempt. The URL's use of `%7Bif:eval(action)%7D` and `Hex(504286)` suggests an attempt to execute malicious JavaScript code, while the `searchword` parameter is being manipulated to execute system commands. This could be a drive-by download or ransomware attack.</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [16/Apr/2025:04:25:59 -0700] "GET /search.asp?searchword=%7Bif:eval(action)%7D99&action=Response.Write(Hex(504286)) HTTP/1.1" 301 639 "-" "Mozilla/5.0 (Windows NT 10.0# WOW64# rv:48.0) Gecko/20100101 Firefox/48.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2009-3890'>CVE-2009-3890</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-6811'>CVE-2008-6811</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-3362'>CVE-2008-3362</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2757'>CVE-2007-2757</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4743'>CVE-2006-4743</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-3390'>CVE-2006-3390</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2667'>CVE-2006-2667</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-4463'>CVE-2005-4463</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-1688'>CVE-2005-1688</a><br></td>
+                    <td>230</td>
+                    <td>This log line does not indicate malicious activity, but rather a legitimate user request to access the Bootstrap Icons CSS file from an iPhone device on a WordPress installation. The IP address is also outside the typical range of known botnets or malicious IPs.</td>
+                    <td style="word-break: break-word; white-space: normal;">94.102.55.18 - - [16/Apr/2025:06:15:38 -0700] "GET /wp-content/plugins/instant-appointment/assets/css/bootstrap-icons.min.css HTTP/1.1" 301 621 "-" "Mozilla/5.0 (iPhone# CPU iPhone OS 17_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML# like Gecko) Version/17.6 Mobile/15E148 Safari/604.1" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2009-3890'>CVE-2009-3890</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-6811'>CVE-2008-6811</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2008-3362'>CVE-2008-3362</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2757'>CVE-2007-2757</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4743'>CVE-2006-4743</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-3390'>CVE-2006-3390</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2667'>CVE-2006-2667</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-4463'>CVE-2005-4463</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2005-1688'>CVE-2005-1688</a><br></td>
+                    <td>231</td>
+                    <td>This log line appears to be a legitimate request for a CSS file, as indicated by the "404" status code and the fact that the IP address is not blocked or restricted. The user agent string suggests a mobile device accessing the site.</td>
+                    <td style="word-break: break-word; white-space: normal;">94.102.55.18 - - [16/Apr/2025:06:15:38 -0700] "GET /wp-content/plugins/instant-appointment/assets/css/bootstrap-icons.min.css HTTP/1.1" 404 328 "-" "Mozilla/5.0 (iPhone# CPU iPhone OS 17_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML# like Gecko) Version/17.6 Mobile/15E148 Safari/604.1" </td>
+                </tr>
+            </table></div>

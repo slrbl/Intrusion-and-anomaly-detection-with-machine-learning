@@ -1,0 +1,117 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 17/06/25 at 06:26:30 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2025-04-22
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 8</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-04-22.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2003-1498'>CVE-2003-1498</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2003-1240'>CVE-2003-1240</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2003-1216'>CVE-2003-1216</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2003-0614'>CVE-2003-0614</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2002-1457'>CVE-2002-1457</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2002-2255'>CVE-2002-2255</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2002-1853'>CVE-2002-1853</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2002-1662'>CVE-2002-1662</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2002-1131'>CVE-2002-1131</a><br></td>
+                    <td>1692</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">198.2.229.241 - - [22/Apr/2025:19:16:55 -0700] "GET /plus/search.php?keyword=xxx&arrs1%5B%5D=99&arrs1%5B%5D=102&arrs1%5B%5D=103&arrs1%5B%5D=95&arrs1%5B%5D=100&arrs1%5B%5D=102&arrs1%5B%5D=95&arrs1%5B%5D=115&arrs1%5B%5D=116&arrs1%5B%5D=121&arrs1%5B%5D=108&arrs1%5B%5D=101&arrs2%5B%5D=47&arrs2%5B%5D=47&arrs2%5B%5D=46&arrs2%5B%5D=46&arrs2%5B%5D=47&arrs2%5B%5D=46&arrs2%5B%5D=46&arrs2%5B%5D=47&arrs2%5B%5D=105&arrs2%5B%5D=110&arrs2%5B%5D=99&arrs2%5B%5D=108&arrs2%5B%5D=117&arrs2%5B%5D=100&arrs2%5B%5D=101&arrs2%5B%5D=47&arrs2%5B%5D=99&arrs2%5B%5D=111&arrs2%5B%5D=109&arrs2%5B%5D=109&arrs2%5B%5D=111&arrs2%5B%5D=110&arrs2%5B%5D=46&arrs2%5B%5D=105&arrs2%5B%5D=110&arrs2%5B%5D=99&arrs2%5B%5D=46&arrs2%5B%5D=112&arrs2%5B%5D=104&arrs2%5B%5D=112&arrs2%5B%5D=0 HTTP/1.1" 404 328 "-" "-" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2012-3588'>CVE-2012-3588</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5389'>CVE-2007-5389</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5318'>CVE-2007-5318</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2861'>CVE-2007-2861</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-1141'>CVE-2007-1141</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4889'>CVE-2006-4889</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2032'>CVE-2006-2032</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2029'>CVE-2006-2029</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-0723'>CVE-2006-0723</a><br></td>
+                    <td>3491</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:50 -0700] "POST /manage/webUploader/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2012-3588'>CVE-2012-3588</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5389'>CVE-2007-5389</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5318'>CVE-2007-5318</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2861'>CVE-2007-2861</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-1141'>CVE-2007-1141</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4889'>CVE-2006-4889</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2032'>CVE-2006-2032</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2029'>CVE-2006-2029</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-0723'>CVE-2006-0723</a><br></td>
+                    <td>3492</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:50 -0700] "POST /mobile/script/webupload/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:orange;text-align:center;color:whitesmoke">Medium</td>
+                    <td><i>No CVE found</i></td>
+                    <td>3480</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:47 -0700] "POST /Public/admin/webuploader/server/preview.php HTTP/1.1" 404 284 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:orange;text-align:center;color:whitesmoke">Medium</td>
+                    <td><i>No CVE found</i></td>
+                    <td>3481</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:47 -0700] "POST /lib/webuploader/0.1.5/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:orange;text-align:center;color:whitesmoke">Medium</td>
+                    <td><i>No CVE found</i></td>
+                    <td>3486</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:48 -0700] "POST /Public/webuploader/0.1.5/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:orange;text-align:center;color:whitesmoke">Medium</td>
+                    <td><i>No CVE found</i></td>
+                    <td>3487</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:49 -0700] "POST /static/lib/webuploader/0.1.5/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:orange;text-align:center;color:whitesmoke">Medium</td>
+                    <td><i>No CVE found</i></td>
+                    <td>3488</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.146.66 - - [22/Apr/2025:20:30:49 -0700] "POST /admin/lib/webuploader/0.1.5/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            </table></div>

@@ -1,0 +1,77 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 20/06/25 at 21:24:51 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2025-06-14
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 3</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-06-14.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>242</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">103.217.74.4 - - [14/Jun/2025:04:13:09 -0700] "HEAD / HTTP/1.1" 200 425 "-" "Mozilla/5.0 (Windows NT 10.0# Win64# x64) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/136.0.0.0 Safari/537.36" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>525</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">182.150.246.110 - - [14/Jun/2025:08:45:58 -0700] "HEAD / HTTP/1.1" 301 223 "http://secrepo.com" "Mozilla/5.0 (compatible# Baiduspider/2.0# +http://www.baidu.com/search/spider.html" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>1179</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">20.57.46.174 - - [14/Jun/2025:17:54:26 -0700] "HEAD / HTTP/1.1" 200 359 "-" "Mozilla/5.0 (Macintosh# Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/47.0.2526.106 Safari/537.36" </td>
+                </tr>
+            </table></div>

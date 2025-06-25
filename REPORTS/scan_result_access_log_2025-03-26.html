@@ -1,0 +1,61 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 18/06/25 at 21:12:11 GMT
+                            <br>
+                            Log file: ./SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2025-03-26
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 1</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-03-26.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>2</td>
+                    <td>The log line appears to indicate a potential security incident, as it shows an unauthorized request to the web application's administrative interface (/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E6%A0%B7%E6%9C%AC%E9%9B%86). This could be a sign of an internal threat or a breach, especially given the request for administrative access.</td>
+                    <td style="word-break: break-word; white-space: normal;">37.120.185.161 - - [26/Mar/2025:00:48:18 -0700] "GET /%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E6%A0%B7%E6%9C%AC%E9%9B%86 HTTP/1.1" 404 291 "-" "Mozilla/5.0 (Windows NT 10.0# Win64# x64) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/100.0.2237.328 Safari/537.36" </td>
+                </tr>
+            </table></div>

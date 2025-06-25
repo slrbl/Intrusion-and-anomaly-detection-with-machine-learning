@@ -1,0 +1,77 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 18/06/25 at 20:34:50 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2025-02-08
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 3</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-02-08.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>251</td>
+                    <td>The request for a PHP readme file from a specific IP address suggests potential malicious activity, as the file is typically used to display version information or licensing terms, and its retrieval may be unauthorized or part of a phishing attempt.</td>
+                    <td style="word-break: break-word; white-space: normal;">128.199.89.103 - - [08/Feb/2025:07:20:19 -0800] "GET /assets/admin/bower_components/jquery.filer/php/readme.txt HTTP/1.1" 301 533 "-" "Mozilla/5.0 (Windows NT 10.0# Win64# x64) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/99.0.4859.172 Safari/537.36" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2012-3588'>CVE-2012-3588</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5389'>CVE-2007-5389</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5318'>CVE-2007-5318</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2861'>CVE-2007-2861</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-1141'>CVE-2007-1141</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4889'>CVE-2006-4889</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2032'>CVE-2006-2032</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2029'>CVE-2006-2029</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-0723'>CVE-2006-0723</a><br></td>
+                    <td>425</td>
+                    <td>The request appears suspicious due to the high error code (404) and a long URL, which may indicate a brute-force or automated attack on a web application. The user agent string also seems outdated, suggesting potential phishing or malware activity.</td>
+                    <td style="word-break: break-word; white-space: normal;">160.191.214.146 - - [08/Feb/2025:19:55:03 -0800] "POST /public/static/admin/lib/webuploader/0.1.5/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2012-3588'>CVE-2012-3588</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5389'>CVE-2007-5389</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-5318'>CVE-2007-5318</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-2861'>CVE-2007-2861</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2007-1141'>CVE-2007-1141</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-4889'>CVE-2006-4889</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2032'>CVE-2006-2032</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-2029'>CVE-2006-2029</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2006-0723'>CVE-2006-0723</a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br></td>
+                    <td>427</td>
+                    <td>The user agent "AppleWebKit" combined with the version number, indicating a Safari browser. The request is for a preview of a file and returns a 404 error, suggesting that the requested file does not exist on the server, which may be an indication of malicious activity such as attempting to view or exploit vulnerable files.</td>
+                    <td style="word-break: break-word; white-space: normal;">160.191.214.146 - - [08/Feb/2025:19:55:03 -0800] "POST /static/lib/webuploader/0.1.5/server/preview.php HTTP/1.1" 404 250 "-" "Mozilla/5.0 AppleWebKit/601.1.46 (KHTML# like Gecko) Version/9.0" </td>
+                </tr>
+            </table></div>

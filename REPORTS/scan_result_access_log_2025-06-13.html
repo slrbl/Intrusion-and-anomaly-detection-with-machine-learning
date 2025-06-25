@@ -1,0 +1,69 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 20/06/25 at 21:28:10 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2025-06-13
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 2</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-06-13.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>875</td>
+                    <td>The web log line appears to be a legitimate request from a search engine bot, specifically Googlebot, for an image file from a secure repository. The IP address and user agent string are consistent with known patterns of Googlebot activity, indicating no malicious intent. There is no indication of a known related attack or vulnerability in this log line.</td>
+                    <td style="word-break: break-word; white-space: normal;">134.122.176.9 - - [13/Jun/2025:10:24:13 -0700] "GET /e/data/ecmseditor/infoeditor/plugins/smiley/images/angel_smile.png HTTP/1.1" 404 328 "http://www.secrepo.com" "Mozilla/5.0 (compatible# Googlebot/2.1# +http://www.google.com/bot.html)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>1299</td>
+                    <td>The request to "/admin.php?m=login&a=index" suggests a potential brute-force or login attempt, as the URL is a standard login page query string. This could be indicative of a phishing or SQL injection attack. Known related attacks include "Brute-Force Login Attacks" and "SQL Injection Attacks", which are common tactics used by attackers to gain unauthorized access to web applications.</td>
+                    <td style="word-break: break-word; white-space: normal;">119.42.147.234 - - [13/Jun/2025:17:21:31 -0700] "GET /admin.php?m=login&a=index HTTP/1.1" 404 328 "-" "Mozilla/5.0 (Windows NT 10.0# WOW64# rv:48.0) Gecko/20100101 Firefox/48.0" </td>
+                </tr>
+            </table></div>

@@ -1,0 +1,69 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 20/06/25 at 21:32:39 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2025-04-13
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 2</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2025-04-13.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-24981'>CVE-2021-24981</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-39333'>CVE-2021-39333</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-26153'>CVE-2020-26153</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-24284'>CVE-2021-24284</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-24212'>CVE-2021-24212</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28707'>CVE-2020-28707</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-35234'>CVE-2020-35234</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-25213'>CVE-2020-25213</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-7241'>CVE-2020-7241</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28039'>CVE-2020-28039</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28037'>CVE-2020-28037</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28036'>CVE-2020-28036</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28032'>CVE-2020-28032</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-25286'>CVE-2020-25286</a><br></td>
+                    <td>1716</td>
+                    <td>The log line indicates a potential malware infection, as the request is for a specific PHP file that is part of a WordPress plugin ("google-seo-rank"), which is not a legitimate or expected request from a client browser. This may be related to the "Fileless" attack vector, where malware is injected into the system without creating files on disk, and can also be associated with the "Google SEO Rank" vulnerability (CVE-2018-6427).</td>
+                    <td style="word-break: break-word; white-space: normal;">135.119.138.6 - - [13/Apr/2025:13:38:23 -0700] "GET /wp-includes/theme-compat/wp-conflg.php/wp-content/plugins/google-seo-rank/index.php HTTP/1.1" 301 585 "-" "-" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-24981'>CVE-2021-24981</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-39333'>CVE-2021-39333</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-26153'>CVE-2020-26153</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-24284'>CVE-2021-24284</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2021-24212'>CVE-2021-24212</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28707'>CVE-2020-28707</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-35234'>CVE-2020-35234</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-25213'>CVE-2020-25213</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-7241'>CVE-2020-7241</a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/'></a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28039'>CVE-2020-28039</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28037'>CVE-2020-28037</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28036'>CVE-2020-28036</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-28032'>CVE-2020-28032</a><br><a href='https://nvd.nist.gov/vuln/detail/CVE-2020-25286'>CVE-2020-25286</a><br></td>
+                    <td>1717</td>
+                    <td>The log line appears to be a legitimate access attempt, as it is an HTTP GET request from a known IP address (135.119.138.6) with a valid HTTP version (HTTP/1.1), indicating a potential web scraping or automated testing activity rather than malicious intent. No known related attacks or vulnerabilities are immediately apparent from this log line alone.</td>
+                    <td style="word-break: break-word; white-space: normal;">135.119.138.6 - - [13/Apr/2025:13:38:23 -0700] "GET /wp-includes/theme-compat/wp-conflg.php/wp-content/plugins/google-seo-rank/index.php HTTP/1.1" 404 250 "-" "-" </td>
+                </tr>
+            </table></div>

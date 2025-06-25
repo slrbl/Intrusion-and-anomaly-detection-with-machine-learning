@@ -247,7 +247,7 @@ def construct_enconded_data_file(data,set_simulation_label):
 
 
 def gen_report(findings,log_file,log_type,llm_model):
-    report_file_path='./SCANS/scan_result_{}.html'.format(log_file.split('/')[-1].replace('.','_'))
+    report_file_path='./REPORTS/scan_result_{}.html'.format(log_file.split('/')[-1].replace('.','_'))
     gmt_time=time.strftime("%d/%m/%y at %H:%M:%S GMT", time.gmtime())
     report_str="""
         <head>
@@ -304,7 +304,7 @@ def gen_report(findings,log_file,log_type,llm_model):
                     <td style="width:43%">Log line</td>
                 </tr>
 
-        """.format(gmt_time,log_file,log_type,len(findings),report_file_path.replace('result','plot').replace('html','png').replace('./SCANS','.'),'Line#',llm_model)
+        """.format(gmt_time,log_file,log_type,len(findings),report_file_path.replace('result','plot').replace('html','png').replace('./REPORTS','.'),'Line#',llm_model)
     else:
         report_str+="""
             <div>

@@ -4,5 +4,5 @@ settings.conf
 webhawk_venv/
 SAMPLE_DATA/labeled-encoded-data-samples/
 
-SCANS/*
-!SCANS/.keep
+REPORTS/*
+!REPORTS/.keep

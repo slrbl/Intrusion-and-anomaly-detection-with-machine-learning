@@ -1,0 +1,69 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 20/06/25 at 21:54:08 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2020-07-01
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 2</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2020-07-01.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>449</td>
+                    <td>The log line indicates a potential SQL injection vulnerability, as the request is made to a PHP file with user-inputted data (/include/dialog/select_soft_post.php). A known related attack is the "OWASP Top Ten - Injection" which can be exploited by an attacker to manipulate the database.</td>
+                    <td style="word-break: break-word; white-space: normal;">125.113.203.26 - - [01/Jul/2020:14:13:50 -0700] "POST /include/dialog/select_soft_post.php HTTP/1.1" 404 291 "http://192.168.125.128/1.html" "Mozilla/5.0 (Windows NT 10.0# Win64# x64) AppleWebKit/537.36 (KHTML# like Gecko) Chrome/70.0.3538.110 Safari/537.36" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>6158</td>
+                    <td>The log line indicates a potential vulnerability in the Apache web server, as it is logging an attempt to include a malicious file ("demotag.lib.php") which could be used for remote code execution (RCE). This is similar to the known "Apache File Inclusion Vulnerability" (CVE-2011-2533), where an attacker can exploit the vulnerability to execute arbitrary PHP code.</td>
+                    <td style="word-break: break-word; white-space: normal;">47.108.116.247 - - [02/Jul/2020:01:25:18 -0700] "HEAD /include/taglib/demotag.lib.php HTTP/1.1" 404 309 "-" "-" </td>
+                </tr>
+            </table></div>

@@ -226,7 +226,7 @@ def gen_report(findings,log_file,log_type):
             </tr>
         """.format(background,severity.capitalize(),finding['log_line_number']+1,finding['log_line'])
     report_str+="</table></div>"
-    with open('./SCANS/scan_result_{}.html'.format(log_file.split('/')[-1]),'w') as result_file:
+    with open('./REPORTS/scan_result_{}.html'.format(log_file.split('/')[-1]),'w') as result_file:
         result_file.write(report_str)
 
 
