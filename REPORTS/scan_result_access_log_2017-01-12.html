@@ -1,0 +1,85 @@
+
+        <head>
+            <style>
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                }
+                td {
+                  padding: 5px;
+                }
+                th {
+                  text-align:left;
+                  padding: 10px;
+                  background-color: whitesmoke;
+                }
+                div {
+                  font-family:monospace;
+                  padding: 50px;
+                }
+            </style>
+        </head>
+    
+            <div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <h1>Webhawk Catch Report</h1>
+                            <p>
+                                Unsupervised learning Web logs/OS processes attack detection.
+                            </p>
+                            Date: 27/06/25 at 19:34:06 GMT
+                            <br>
+                            Log file: /Users/walid/Downloads/access.log.2017-01-12
+                            <br>
+                            Log type: apache logs
+                            <br>
+                            <h3>Findings: 4</h3>
+                        </td>
+                        <td>
+                            <img src='./scan_plot_access_log_2017-01-12.png'/>
+                        </td>
+                </tr>
+                </table>
+            <table width="100%">
+                <tr style="background:gainsboro;padding:10px">
+                    <td style="width:5%">Severity</td>
+                    <td style="width:8%">Related CVE(s)</td>
+                    <td style="width:4%">Line#</td>
+                    <td style="width:40%">LLM Insights(llama3.2)</td>
+                    <td style="width:43%">Log line</td>
+                </tr>
+
+        
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>221</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">106.38.241.146 - - [12/Jan/2017:08:52:45 -0800] "GET /honeypot/Honeypot%20-%20Howto%20-%20BSides%20Austin.pdf HTTP/1.1" 304 131 "-" "Sogou web spider/4.0(+http://www.sogou.com/docs/help/webmasters.htm#07)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>1918</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">180.76.15.28 - - [12/Jan/2017:11:41:28 -0800] "GET /honeypot/Honeypot%20-%20Howto%20-%20BSides%20Austin.pdf HTTP/1.1" 200 880885 "-" "Mozilla/5.0 (compatible# Baiduspider/2.0# +http://www.baidu.com/search/spider.html)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>11612</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">220.134.164.82 - - [12/Jan/2017:19:52:41 -0800] "GET /honeypot/Honeypot%20-%20Howto%20-%20BSides%20Austin.pdf HTTP/1.1" 200 2928460 "-" "Mozilla/4.0 (compatible# MSIE 6.0# Windows NT 5.1)" </td>
+                </tr>
+            
+                <tr>
+                    <td style="background:OrangeRed;text-align:center;color:whitesmoke">High</td>
+                    <td><i>No CVE found</i></td>
+                    <td>11728</td>
+                    <td>N/A</td>
+                    <td style="word-break: break-word; white-space: normal;">2.29.112.205 - - [13/Jan/2017:01:11:33 -0800] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 340 "-" "com.apple.WebKit.WebContent/10600.8.9 CFNetwork/720.5.7 Darwin/14.5.0 (x86_64)" </td>
+                </tr>
+            </table></div>

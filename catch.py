@@ -331,6 +331,7 @@ def main():
     parser.add_argument('-v', '--find_cves', help = 'Find the CVE(s) that are related to the attack traces', action='store_true')
     parser.add_argument('-a', '--get_ai_advice', help = 'Get AI advice on the detection', action='store_true')
     parser.add_argument('-q', '--quick_scan', help = 'Only most critical detection (no minority clusters)', action='store_true')
+    parser.add_argument('-f', '--submit_to_app', help = 'Submit the finding to Webhawk app', action='store_true')
     urllib3.disable_warnings()
 
     # Get parameters
@@ -535,6 +536,14 @@ def main():
             config['LLM']['model']
             )
         webbrowser.open('file://{}/{}'.format(os.getcwd(),report_file))
+
+    if args['submit_to_app']:
+        submit_to_app(
+            all_findings,args['log_file'],
+            args['log_type'],
+            config['LLM']['model']
+            )
+
 
 
 if __name__ == '__main__':

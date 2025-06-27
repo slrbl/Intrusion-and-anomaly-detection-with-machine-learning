@@ -9,6 +9,7 @@ import sys
 import time
 import psutil
 import logging
+import requests
 
 def get_process_col_locations(header_line, list_col_names):
     col_locations = {}
@@ -373,6 +374,51 @@ def gen_report(findings,log_file,log_type,llm_model):
     with open(report_file_path,'w') as result_file:
         result_file.write(report_str)
     return report_file_path
+
+def submit_to_app(findings,log_file,log_type,llm_model):
+    for finding in findings:
+        severity=finding['severity']
+        #cve = finding['cve'] if 'cve' in finding else 'Not found'
+
+        cves=''
+        if 'cve' in finding and finding['cve']!='':
+            cve_list = finding['cve'].split(' ')
+            if len(cve_list)>0:
+                cve_list.reverse()
+                for cve in cve_list:
+                    cves += "<a href='https://nvd.nist.gov/vuln/detail/{}'>{}</a><br>".format(cve,cve)
+        else:
+            cves='<i>No CVE found</i>'
+
+        if severity == 'medium':
+            background='orange'
+        if severity == 'high':
+            background='OrangeRed'
+
+        ai_advice=finding['ai_advice'] if 'ai_advice' in finding else 'N/A'
+
+        url = "http://localhost:3000/api/v1/incidents"
+        headers = {
+            "Content-Type": "application/json"
+        }
+        data = {
+            "incident": {
+                "cves": cves,
+                "severity":severity,
+                "status":'Open',
+                "verdict":'Unknown',
+                "llm_insights":ai_advice,
+                "log_line":finding['log_line_number'],
+                "log_line_content":finding['log_line'],
+                "attack_vector": "Web"
+            }
+        }
+
+        response = requests.post(url, headers=headers, json=data)
+
+        print(response.status_code)
+        print(response.json())
+
 
 def get_process_details(pid):
     process_details_attributes = ast.literal_eval(config['PROCESS_DETAILS']['attributes'])
