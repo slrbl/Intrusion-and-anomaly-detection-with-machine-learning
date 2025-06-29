@@ -148,12 +148,12 @@ def main(placeholder,logs_content):
     logging.info('Number of log lines by cluster:{}'.format(find_elements_by_cluster(labels)))
     logging.info('\nTotal number of log lines:{}'.format(len(data)))
     if len(minority_clusters)>0:
-        logging.info('The minority clusters are:{}'.format(minority_clusters))
+        logging.info('{} Minority clusters found'.format(len(minority_clusters)))
     else:
         logging.info('No minority clusters found.')
     
     #where to save the plot
-    save_plot_at ='./SCANS/scan_plot_{}'.format(log_file.split('/')[-1].replace('.','_'))
+    save_plot_at ='./REPORTS/scan_plot_{}'.format(log_file.split('/')[-1].replace('.','_'))
     
     # plot findings and save the plot if save_plot_at is defined
     #plot_findings(dataframe,labels,save_plot_at)

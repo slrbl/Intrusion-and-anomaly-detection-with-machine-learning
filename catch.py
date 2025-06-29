@@ -510,7 +510,7 @@ def main():
     #logging.info('Number of log lines by cluster:{}'.format(find_elements_by_cluster(labels)))
     logging.info('\nTotal number of log lines:{}'.format(len(data)))
     if len(minority_clusters)>0:
-        logging.info('The minority clusters are:{}'.format(minority_clusters))
+        logging.info('{} Minority clusters found'.format(len(minority_clusters)))
     else:
         logging.info('No minority clusters found, or you selected a quick scan')
 
