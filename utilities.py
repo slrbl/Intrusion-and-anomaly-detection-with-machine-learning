@@ -339,7 +339,8 @@ def gen_report(findings,log_file,log_type,llm_model):
             if len(cve_list)>0:
                 cve_list.reverse()
                 for cve in cve_list:
-                    cves += "<a href='https://nvd.nist.gov/vuln/detail/{}'>{}</a><br>".format(cve,cve)
+                    if 'CVE-' in cve:
+                        cves += "<a href='https://nvd.nist.gov/vuln/detail/{}'>{}</a><br>".format(cve,cve)
         else:
             cves='<i>No CVE found</i>'
 
@@ -386,7 +387,8 @@ def submit_to_app(findings,log_file,log_type,llm_model):
             if len(cve_list)>0:
                 cve_list.reverse()
                 for cve in cve_list:
-                    cves += "<a href='https://nvd.nist.gov/vuln/detail/{}'>{}</a><br>".format(cve,cve)
+                    if 'CVE-' in cve:
+                        cves += "<a href='https://nvd.nist.gov/vuln/detail/{}'>{}</a><br>".format(cve,cve)
         else:
             cves='<i>No CVE found</i>'
 

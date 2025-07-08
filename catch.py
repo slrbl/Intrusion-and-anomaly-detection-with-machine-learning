@@ -247,8 +247,8 @@ def get_minority_clusters(elements_by_cluster,threshold):
     return minority_clusters
 
 
-
-def find_cves(findings):
+# This function will be removed as it has been replaced with a new find_cves which is LLM based 
+def find_cves_old(findings):
     bad_chars = ['/','?','=','&','%','#']
     enriched_findings = []
     checked_candidate_strings = {}
@@ -286,6 +286,33 @@ def find_cves(findings):
                         logging.info('Something wrong getting CVE(s)')
         enriched_findings.append(finding)
     return enriched_findings
+
+
+# Find CVE(s) relared to the attack trace based on LLM
+def find_cves(findings):
+    bad_chars = ['/','?','=','&','%','#']
+    enriched_findings = []
+    checked_candidate_strings = {}
+    for finding in findings:
+        # Only find CVE for the high severity findings
+        if finding['severity'] == 'high':
+            finding['cve'] = ''
+            final_requested_url = finding['log_line'].split('"')[1].split(' ')[1]
+            url=config['LLM']['url']
+            data = {
+                    "model": config['LLM']['model'],
+                    "prompt": (
+                        "Find the CVE(s) related to \"{}\". If you can't help or if you don't find anything return \"None\" and do not return any text.  Return only a one line list of CVEs separated by commas.".format(final_requested_url)
+                    ),                        "stream": False,
+            }
+            response = requests.post(url, json=data)
+            if "CVE-" in response.json()['response']:
+                finding['cve'] = response.json()['response'].replace(" ","").replace(","," ")
+            else:
+                finding['cve'] = ''
+        enriched_findings.append(finding)
+    return enriched_findings
+
 
 
 def get_llm_insights(findings):
