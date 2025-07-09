@@ -18,7 +18,7 @@ mdurl==0.1.2
 numpy==2.2.6
 packaging==25.0
 pandas==2.2.3
-pillow==11.2.1
+pillow>=11.3.0
 psutil==7.0.0
 pydantic==2.11.5
 pydantic_core==2.33.2
