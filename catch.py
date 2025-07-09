@@ -300,7 +300,7 @@ def find_cves(findings):
             final_requested_url = finding['log_line'].split('"')[1].split(' ')[1]
             url=config['LLM']['url']
             data = {
-                    "model": config['LLM']['model'],
+                    "model": 'llama3.2:latest',
                     "prompt": (
                         "Find the CVE(s) related to \"{}\". If you can't help or if you don't find anything return \"None\" and do not return any text.  Return only a one line list of CVEs separated by commas.".format(final_requested_url)
                     ),                        "stream": False,
