@@ -10,6 +10,7 @@ import time
 import psutil
 import logging
 import requests
+import socket
 
 def get_process_col_locations(header_line, list_col_names):
     col_locations = {}
@@ -412,7 +413,8 @@ def submit_to_app(findings,log_file,log_type,llm_model):
                 "llm_insights":ai_advice,
                 "log_line":finding['log_line_number'],
                 "log_line_content":finding['log_line'],
-                "attack_vector": "Web"
+                "attack_vector": "Web",
+                "host":socket.gethostname()
             }
         }
 
