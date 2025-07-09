@@ -551,7 +551,7 @@ def main():
         logging.info('> Finding CVEs started')
         all_findings = find_cves(all_findings)
     if args['get_ai_advice'] == True:
-        logging.info('> Getting AI advice')
+        logging.info('> Getting AI advice started')
         all_findings = get_llm_insights(all_findings)
 
     # Generate a HTML report if requested
