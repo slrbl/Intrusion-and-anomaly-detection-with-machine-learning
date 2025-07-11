@@ -400,7 +400,8 @@ def submit_to_app(findings,log_file,log_type,llm_model):
 
         ai_advice=finding['ai_advice'] if 'ai_advice' in finding else 'N/A'
 
-        url = "http://localhost:3000/api/v1/incidents"
+        url = config['WEBAPP']['url']
+
         headers = {
             "Content-Type": "application/json"
         }

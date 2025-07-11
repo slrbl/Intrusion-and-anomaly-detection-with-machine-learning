@@ -24,3 +24,6 @@ year_threshold:YYYY
 url:http://localhost:11434/api/generate
 model:llama3.2
 prompt:Analyze this web log line for malicious activity. Provide a brief one pragraph (less than 60 words) as a response. Indidate if there is a known related attack or vulnerability. Do not start with 'This log line'
+
+[WEBAPP]
+url:http://localhost:3000/api/v1/incidents
