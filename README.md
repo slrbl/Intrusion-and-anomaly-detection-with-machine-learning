@@ -97,6 +97,7 @@ options:
   -v, --find_cves       Find the CVE(s) that are related to the attack traces
   -a, --get_ai_advice   Get AI advice on the detection
   -q, --quick_scan      Only most critical detection (no minority clusters)
+  -f, --submit_to_app   Submit the finding to Webhawk app
 ```
 
 
