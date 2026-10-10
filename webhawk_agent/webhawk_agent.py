@@ -3,6 +3,7 @@ import requests
 import socket
 import configparser
 import sys
+import time
 
 config = configparser.ConfigParser()
 config.sections()
@@ -35,9 +36,29 @@ except Exception as e:
 data = {"hostname":socket.gethostname(),"logs_content":logs,"log_file":args.log_file}
 
 try:
+    start_time = time.time()
     print('Your logs are being processed..')
-    response=requests.post("http://{}:{}/scan".format(config['WEBHAWK']['server_ip'],config['WEBHAWK']['server_port']),json=data)
+    url = "http://{}:{}/scan".format(
+        config['WEBHAWK']['server_ip'],
+        config['WEBHAWK']['server_port'],
+    )
+    response = requests.post(url, json=data, timeout=300)
+    if not response.ok:
+        print(
+            f"Webhawk service returned HTTP {response.status_code}: {response.text}"
+        )
+        sys.exit(1)
     print(response.json())
-except:
-    print('Not able to reach webhawk service.\nMake sure that your webhawk server is up that that detection service is running.\nExiting..')
+    end_time = time.time()
+    print(f"Took {end_time - start_time} seconds.")
+except requests.RequestException as e:
+    print(
+        'Not able to reach webhawk service.\n'
+        'Make sure that your webhawk server is up and that the detection service is running.\n'
+        f'Details: {e}\n'
+        'Exiting..'
+    )
+    sys.exit(1)
+except ValueError as e:
+    print(f"Invalid JSON response from webhawk service: {e}")
     sys.exit(1)

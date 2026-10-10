@@ -170,6 +170,7 @@ def main(hostname,log_file,logs_content):
     if cves_finding==True or ai_advice==True:
         # Pull model if not available 
         pull_model(config['LLM']['model'],config['LLM']['url'])
+        pull_model(config['JEV']['jev'],config['JEV']['url'])
 
     for finding in all_findings:
         data_is_ok=True 

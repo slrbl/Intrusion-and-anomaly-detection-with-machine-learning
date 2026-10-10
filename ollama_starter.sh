@@ -11,6 +11,8 @@ done
 # Pull the llama3 model (replace with the exact name if it's llama3:latest or llama3:instruct etc.)
 echo "Pulling ollama model..."
 ollama pull granite4:latest
+ollama pull tev1:0.8b
+ollama list
 #ollama pull tinyllama
 # Ollama pull a_model_of_your_choice
 

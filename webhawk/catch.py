@@ -281,75 +281,6 @@ def extract_filenames_from_url(http_url: str, param_name='file') -> list:
     return filenames
 
 
-"""
-# This function will be removed as it has been replaced with a new find_cves which is LLM based 
-def find_cves(findings):
-    bad_chars = ['/','?','=','&','%','#']
-    enriched_findings = []
-    checked_candidate_strings = {}
-    for finding in findings:
-        # Only find CVE for the high severity findings
-        if finding['severity'] == 'high':
-            finding['cve'] = ''
-            final_requested_url = finding['log_line'].split('"')[1].split(' ')[1]
-
-            # Extract file names from the url and retrieve related vulnerabilities 
-            for candidate_string in extract_filenames_from_url(final_requested_url):
-                try:
-                    if candidate_string not in checked_candidate_strings:
-                        checked_candidate_strings[candidate_string] = ''
-                        response = requests.get('{}{}'.format(config['CVE']['source'],candidate_string),verify=False)
-                        max_cve_by_candidate_string = 10
-                        if response.status_code == 200 and 'vulnerabilities' in response.json():
-                            for vuln in response.json()['vulnerabilities']:
-                                # Get only the most recent CVE
-                                cve_year=int(vuln['cve']['id'].split('-')[1])
-                                if cve_year>=int(config['CVE']['year_threshold']):
-                                    logging.info('{} found'.format(vuln['cve']['id']))
-                                    max_cve_by_candidate_string -= 1
-                                    if max_cve_by_candidate_string == 0:
-                                        break
-                                    finding['cve'] += vuln['cve']['id']+' '
-                                    checked_candidate_strings[candidate_string]+=vuln['cve']['id']+' '
-                            # Sleep to ne be blocked by services.nvd.nist.gov
-                            time.sleep(10)
-                    else:
-                        finding['cve'] += checked_candidate_strings[candidate_string] + ' '
-                except:
-                    logging.info('Something wrong getting CVE(s)')
-        enriched_findings.append(finding)
-    return enriched_findings
-
-
-# Find CVE(s) relared to the attack trace based on LLM
-def find_cves_(findings):
-    print('> Finding related CVEs')
-    bad_chars = ['/','?','=','&','%','#']
-    enriched_findings = []
-    checked_candidate_strings = {}
-    for finding in findings:
-        # Only find CVE for the high severity findings
-        if finding['severity'] == 'high':
-            finding['cve'] = ''
-            final_requested_url = finding['log_line'].split('"')[1].split(' ')[1]
-            print('> Finding CVEs')
-            url='{}/api/generate'.format(config['LLM']['url'])
-            data = {
-                    "model": config['LLM']['model'],
-                    "prompt": (
-                        "Find the CVE(s) related to \"{}\". If you can't help or if you don't find anything return \"None\" and do not return any text.  Return only a one line list of CVEs separated by commas.".format(final_requested_url)
-                    ),                        "stream": False,
-            }
-            response = requests.post(url, json=data)
-            if "CVE-" in response.json()['response']:
-                finding['cve'] = response.json()['response'].replace(" ","").replace(","," ")
-            else:
-                finding['cve'] = ''
-
-        enriched_findings.append(finding)
-    return enriched_findings
-"""
-
 
 def find_cves(findings):
     print('> Finding related CVEs')
@@ -393,68 +324,60 @@ def pull_model(model_name,url):
 
 
 def get_llm_insights(findings):
-    enriched_findings = []
-    current=1
-    count=len(findings)
-    for finding in findings:
-        logging.info('> Getting AI advice {}/{}'.format(current,count))
-        current+=1
-        finding['ai_advice'] = ''
-        final_requested_url = finding['log_line'].split('"')[1].split(' ')[1]
-        url='{}/api/generate'.format(config['LLM']['url'])
-        prompt="{} {}".format(config['LLM']['prompt'],finding['log_line'])
-        data = {
-                "model": config['LLM']['model'],
-                "prompt": (
-                   prompt
-                ),
-                "stream": False,
-        }
-        
-        response = requests.post(url, json=data)
-        """"
-        print("========================")
-        print(response.text)
-        print("========================")
-        """
-        initial_llm_insights=response.json()['response']
+  enriched_findings = []
+  count = len(findings)
 
+  # enumerate handles the counting automatically on every single iteration
+  for current, finding in enumerate(findings, start=1):
+    
+    # JEV Classification to check if this is a FP
+    logging.info(f"> Checking if FP {current}/{count}")
+    data = {
+        "model": config["JEV"]["jev"],
+        "state": finding["log_line"],
+        "questions": {
+            "is_false_positive": {
+                "type": "noul",
+                "instructions": "Does the state contain a potential attack trace ?",
+                "criteria": {
+                    "true": "The state doesn't contain attack traces",
+                    "false": "The state contains attack traces",
+                },
+            }
+        },
+    }
+    url = "{}{}".format(config["JEV"]["url"], config["JEV"]["jev_endpoint"])
+    response = requests.post(url, json=data)
+    is_fp_prob = response.json()["answers"]["is_false_positive"]["noul"]
+    is_confimed_prob = 1 - is_fp_prob
+    
+    # Get more insights if this is not a FP
+    if is_confimed_prob >= float(config['JEV']['confirmed_threshold']) :
+      url = "{}{}".format(config["LLM"]["url"], config["LLM"]["model_endpoint"])
+      logging.info(f"> Getting AI advice {current}/{count}")
+      finding["ai_advice"] = ""
 
-        #refined_llm_insights
-        refinement_prompt = f"""
-        You are a cybersecurity analysis reviewer and refiner.
+      prompt = f"{config['LLM']['prompt']} {finding['log_line']}"
+      data = {
+          "model": config["LLM"]["model"],
+          "prompt": prompt,
+          "stream": False,
+      }
+      response = requests.post(url, json=data)
+      refined_llm_insights = response.json()["response"]
+      finding["ai_advice"] = refined_llm_insights
 
-        User asked:
-        {prompt}
+    else:
+      finding["ai_advice"] = (
+          '{"potential_attack_attempt":false,"details":"This is a potential'
+          ' false positive","severity":"low","CVE":"","owasp":'
+          ' "","recommendation":"Nothing to do."}'
+      )
 
-        Provided analysis:
-        {initial_llm_insights}
+    enriched_findings.append(finding)
 
-        Step 1: Briefly evaluate the provided analyis by making sure that it is correct and make sure that the provided CVEs and OWASPs actually exist.
-        Step 2: If improvement is needed, provide a refined analysis.
-        If the original analysis is already correct, return it unchanged."""
+  return enriched_findings
 
-        data = {
-                "model": config['LLM']['model'],
-                "prompt": (
-                   prompt
-                ),
-                "stream": False,
-        }
-        
-        response = requests.post(url, json=data)
-        refined_llm_insights=response.json()['response']
-
-
-        #finding['ai_advice'] = initial_llm_insights
-        finding['ai_advice'] = refined_llm_insights
-        #finding['refined_ai_advice'] = refined_llm_insights
-        """
-        print(initial_llm_insights)
-        print(refined_llm_insights)
-        """
-        enriched_findings.append(finding)
-    return enriched_findings
 
     
 
@@ -688,6 +611,7 @@ def main():
         webbrowser.open('file://{}/{}'.format(os.getcwd(),report_file))
 
     if args['submit_to_app']:
+
         hostname=socket.gethostname()
         logging.info('> Submission to Webhawk app')
         submit_to_app(
