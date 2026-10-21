@@ -29,7 +29,7 @@ To get data from your endpoints, Webhawk provide an agent that your can easily d
 The tool is easy to deploy using Docker Compose, which simplifies the installation of the three main components: the detection engine, the web application, and the LLM services.
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/webhawk_design_v2.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/webhawk_design_v3.png">
 </p>
 
 ## Telemetry
