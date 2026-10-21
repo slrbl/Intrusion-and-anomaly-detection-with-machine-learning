@@ -1,4 +1,5 @@
 import argparse
+import platform
 import requests
 import socket
 import configparser
@@ -42,7 +43,17 @@ try:
         config['WEBHAWK']['server_ip'],
         config['WEBHAWK']['server_port'],
     )
-    response = requests.post(url, json=data, timeout=300)
+    user_agent = "WebhawkAgent/1.0 ({}; {}; {})".format(
+        platform.system() or "unknown",
+        platform.release() or "unknown",
+        platform.machine() or "unknown",
+    )
+    response = requests.post(
+        url,
+        json=data,
+        headers={"User-Agent": user_agent},
+        timeout=300,
+    )
     if not response.ok:
         print(
             f"Webhawk service returned HTTP {response.status_code}: {response.text}"

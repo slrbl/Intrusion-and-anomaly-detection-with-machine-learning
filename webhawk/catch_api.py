@@ -2,12 +2,12 @@
 from catch import *
 import json
 
-def main(hostname,log_file,logs_content):
+def main(hostname,log_file,logs_content,user_agent=None):
 
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
 
-    get_stats('api')
+    get_stats('agent', user_agent)
 
     log_type="apache"
     LOG_LINES_LIMIT=1000000

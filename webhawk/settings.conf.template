@@ -38,6 +38,9 @@ jev_endpoint=/v1/systemone
 jev:tev1:0.8b
 confirmed_threshold=0.3
 
+[STATS]
+url:https://webhawk.goatcounter.com/count
+
 [WEBAPP]
 # Use the following url if using docker compose services
 url:http://webhawk_ui:8080/api/v1/incidents

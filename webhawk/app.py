@@ -1,6 +1,6 @@
 # app.py
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from catch_api import main
 
@@ -26,7 +26,12 @@ def root():
 
 # POST endpoint to log analysis
 @app.post("/scan")
-def scan(input: NameInput):
-    result = main(input.hostname,input.log_file,input.logs_content)
+def scan(input: NameInput, request: Request):
+    result = main(
+        input.hostname,
+        input.log_file,
+        input.logs_content,
+        request.headers.get("user-agent"),
+    )
     return {"result": result}
 

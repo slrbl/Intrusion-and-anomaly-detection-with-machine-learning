@@ -3,10 +3,12 @@
 # Version: 3.0 - 2025/08/06 - Blackhat Las Vegas 
 
 import configparser
+import platform
 import re
 import ast
 import sys
 import time
+import uuid
 import psutil
 import logging
 import requests
@@ -444,10 +446,29 @@ def get_process_details(pid):
         return {}
     
 
-def get_stats(dest):
+def client_user_agent():
+    return "Webhawk/3.0 ({}; {}; {})".format(
+        platform.system() or "unknown",
+        platform.release() or "unknown",
+        platform.machine() or "unknown",
+    )
+
+
+def get_stats(dest, user_agent=None):
     try:
-        requests.get("https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/webhawk/STATS/{}.txt".format(dest))
-    except:
+        # GoatCounter counts one visitor per IP and user agent. A unique suffix
+        # makes every run count while keeping the machine details.
+        stats_user_agent = "{} {}".format(
+            user_agent or client_user_agent(),
+            uuid.uuid4().hex,
+        )
+        requests.get(
+            config['STATS']['url'],
+            params={'p': '/{}'.format(dest)},
+            headers={'User-Agent': stats_user_agent},
+            timeout=5,
+        )
+    except Exception:
         pass
 
 config = configparser.ConfigParser()

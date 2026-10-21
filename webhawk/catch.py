@@ -384,7 +384,7 @@ def get_llm_insights(findings):
 
 def main():
 
-    get_stats('script')
+    get_stats('cli')
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', '--log_file', help = 'The raw log file', required = True)

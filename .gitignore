@@ -3,7 +3,7 @@
 /webhawk/settings.conf
 /webhawk/webhawk_venv/*
 
-__pycache__/*
+__pycache__/
 
 /webhawk/SAMPLE_DATA/RAW_APACHE_LOGS/*
 !/webhawk/SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2021-10-22
