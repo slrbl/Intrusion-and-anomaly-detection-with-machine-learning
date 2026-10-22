@@ -26,6 +26,7 @@ __pycache__/
 /webhawk_ui/.env*
 
 # Ignore all logfiles and tempfiles.
+/TESTING_LOGS_GENERATOR/*.log
 /webhawk_ui/log/*
 /webhawk_ui/tmp/*
 !/webhawk_ui/log/.keep
