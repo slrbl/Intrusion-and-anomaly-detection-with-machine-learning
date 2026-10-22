@@ -12,7 +12,6 @@ import socket
 import pyfiglet
 import termcolor
 import urllib3
-import requests
 import numpy as np
 import pandas as pd
 import webbrowser
@@ -25,6 +24,7 @@ from rich import print as rich_print
 
 
 from utilities import *
+from enrich import find_cves, get_llm_insights
 
 def get_data(log_file, log_content, log_type, log_size_limit, features, encoding_type):
     """
@@ -281,105 +281,154 @@ def extract_filenames_from_url(http_url: str, param_name='file') -> list:
     return filenames
 
 
-
-def find_cves(findings):
-    print('> Finding related CVEs')
-    enriched_findings = []
-    checked_candidate_strings = {}
-    for finding in findings:
-        # Only find CVE for the high severity findings
-        if finding['severity'] == 'high':
-            finding['cve'] = ''
-            final_requested_url = finding['log_line'].split('"')[1].split(' ')[1]
-            print('> Finding CVEs')
-            url='{}/api/generate'.format(config['LLM']['url'])
-            data = {
-                    "model": config['LLM']['model'],
-                    "prompt": (
-                        "Extract all the CVE(s) from \"{}\". If don't find anything return \"None\" and do not return any text.  Return only a one line list of CVEs separated by commas.".format(finding['ai_advice'])
-                    ),                        "stream": False,
-            }
-            response = requests.post(url, json=data)
-            if "CVE-" in response.json()['response']:
-                finding['cve'] = response.json()['response'].replace(" ","").replace(","," ")
-            else:
-                finding['cve'] = ''
-
-        enriched_findings.append(finding)
-    return enriched_findings
+HTTP_FEATURES = [
+    'params_number',
+    #'size', # Stopped using size because it makes a lot of false positive detections
+    'length',
+    'upper_cases',
+    'lower_cases',
+    'special_chars',
+    'url_depth',
+    'user_agent',
+    'http_query',
+    'ip',
+    'return_code',
+    'log_line',
+]
 
 
-def pull_model(model_name,url):
-    response = requests.post('{}/api/pull'.format(url), json={"name": model_name}, stream=True)
-    if response.status_code == 200:
-        print(f"Pulling model: {model_name}")
-        for line in response.iter_lines():
-            if line:
-                print(line.decode('utf-8'))
-        print("Model pulled successfully.")
+def detect(
+    log_file,
+    log_content,
+    log_type,
+    log_lines_limit=1000000,
+    encoding_type='fraction_encoding',
+    standardize=False,
+    eps=None,
+    min_samples=None,
+    opt_silhouette=False,
+    opt_lambda=0.01,
+    minority_threshold=5,
+    quick_scan=False,
+    show_plots=False,
+    plot_after_pca=False,
+):
+    """
+    Cluster log lines and return high and medium findings.
+
+    Returns None when DBSCAN finds a single cluster and there is nothing to report.
+    """
+    logging.info('\n> Data reading started')
+    data = get_data(
+        log_file,
+        log_content,
+        log_type,
+        log_lines_limit,
+        HTTP_FEATURES,
+        encoding_type,
+    )
+
+    if log_type != 'os_processes':
+        dataframe = data.to_numpy()[:, list(range(0, len(HTTP_FEATURES) - 1))]
     else:
-        print(f"Failed to pull model: {response.status_code}")
-        print(response.text)
+        dataframe = data
 
+    if standardize:
+        dataframe = sklearn.preprocessing.StandardScaler().fit_transform(dataframe)
 
+    if show_plots:
+        logging.info('\n> Informative plotting started')
+        if log_type != 'os_processes':
+            plot_data([data['http_query'], data['url_depth']], 'Informative plot of http_query and url_depth')
+            plot_data(
+                [data['http_query'], data['url_depth'], data['return_code']],
+                'Informative plot of http_query, url_depth and return_code',
+            )
+        else:
+            plot_data([data['%CPU'], data['POWER']], 'Plotting %CPU and POWER')
+            plot_data([data['%CPU'], data['POWER'], data['CYCLES']], 'Plotting %CPU, POWER and CYCLES')
 
-def get_llm_insights(findings):
-  enriched_findings = []
-  count = len(findings)
+    pca = sklearn.decomposition.PCA(n_components=2)
+    principal_components_df = pca.fit_transform(dataframe)
+    dataframe = pd.DataFrame(
+        data=principal_components_df,
+        columns=['pc_1', 'pc_2'],
+    )
 
-  # enumerate handles the counting automatically on every single iteration
-  for current, finding in enumerate(findings, start=1):
-    
-    # JEV Classification to check if this is a FP
-    logging.info(f"> Checking if FP {current}/{count}")
-    data = {
-        "model": config["JEV"]["jev"],
-        "state": finding["log_line"],
-        "questions": {
-            "is_false_positive": {
-                "type": "noul",
-                "instructions": "Does the state contain a potential attack trace ?",
-                "criteria": {
-                    "true": "The state doesn't contain attack traces",
-                    "false": "The state contains attack traces",
-                },
-            }
-        },
+    if plot_after_pca:
+        plot_data([dataframe['pc_1'], dataframe['pc_2']], 'Data after dimensiality reduction using PCA')
+
+    if eps is None:
+        logging.info('\n> No Epsilon input. Finding the max sorted neighbors curvature point and use it as Epsilon')
+        selected_eps = find_max_curvature_point(dataframe, show_plots)
+        logging.info('{}{}'.format(4 * ' ', selected_eps))
+    else:
+        selected_eps = float(eps)
+
+    if opt_silhouette:
+        logging.info('\n> Optimizing Epsilon to get the best BDSCAN Silhouette Coefficient')
+        best_silouhette, best_eps_for_silouhette = optimize_silouhette_coefficient(
+            selected_eps, dataframe, opt_lambda
+        )
+        logging.info('{}{}'.format(4 * ' ', best_eps_for_silouhette))
+        selected_eps = best_eps_for_silouhette
+
+    logging.info('{}The value {} will be used as final DBSCAN Epsilon'.format(4 * ' ', selected_eps))
+    logging.info('\n> Starting detection..')
+
+    if min_samples is None:
+        dbscan = sklearn.cluster.DBSCAN(eps=selected_eps)
+    else:
+        dbscan = sklearn.cluster.DBSCAN(eps=selected_eps, min_samples=int(min_samples))
+    dbscan_model = dbscan.fit(dataframe)
+
+    if len(set(dbscan_model.labels_)) == 1:
+        logging.info('{}Only one cluster was found using the value {} as epsilon'.format(4 * ' ', selected_eps))
+        logging.info('{}Trying without epsilon'.format(4 * ' '))
+        dbscan = sklearn.cluster.DBSCAN()
+        dbscan_model = dbscan.fit(dataframe)
+    if len(set(dbscan_model.labels_)) == 1:
+        logging.info('{}Only one cluster was found without an epsilon value.'.format(4 * ' '))
+        return None
+
+    labels = dbscan_model.labels_
+    elements_by_cluster = find_elements_by_cluster(labels)
+    if quick_scan:
+        minority_clusters = []
+    else:
+        minority_clusters = get_minority_clusters(elements_by_cluster, minority_threshold)
+
+    high_findings = catch(labels, data, -1, log_type)
+    if len(high_findings) > 0:
+        logging.info('\n\n\n\n    ' + 100 * '/' + '   HIGH Severity findings   ' + 100 * '\\')
+        print_findings(high_findings, log_type)
+
+    medium_findings = []
+    for label in minority_clusters:
+        if label != -1:
+            medium_findings += catch(labels, data, label, log_type)
+
+    if len(medium_findings) > 0:
+        logging.info('\n\n\n\n    ' + 100 * '/' + '   MEDIUM Severity findings   ' + 100 * '\\')
+        print_findings(medium_findings, log_type)
+
+    n_noise = list(labels).count(-1)
+    logging.info('\nEstimated number of clusters: %d' % len(set(labels)))
+    logging.info('Estimated number of outliers/anomalous points: %d' % n_noise)
+    logging.info('DBSCAN Silhouette Coefficient: %0.3f' % sklearn.metrics.silhouette_score(dataframe, labels))
+    logging.info('{} log lines detected as containing potential malicious behaviour traces'.format(n_noise))
+    logging.info('Number of log lines by cluster:{}'.format(elements_by_cluster))
+    logging.info('\nTotal number of log lines:{}'.format(len(data)))
+    if len(minority_clusters) > 0:
+        logging.info('{} Minority clusters found'.format(len(minority_clusters)))
+    else:
+        logging.info('No minority clusters found, or you selected a quick scan')
+
+    return {
+        'findings': high_findings + medium_findings,
+        'dataframe': dataframe,
+        'labels': labels,
     }
-    url = "{}{}".format(config["JEV"]["url"], config["JEV"]["jev_endpoint"])
-    response = requests.post(url, json=data)
-    is_fp_prob = response.json()["answers"]["is_false_positive"]["noul"]
-    is_confimed_prob = 1 - is_fp_prob
-    
-    # Get more insights if this is not a FP
-    if is_confimed_prob >= float(config['JEV']['confirmed_threshold']) :
-      url = "{}{}".format(config["LLM"]["url"], config["LLM"]["model_endpoint"])
-      logging.info(f"> Getting AI advice {current}/{count}")
-      finding["ai_advice"] = ""
-
-      prompt = f"{config['LLM']['prompt']} {finding['log_line']}"
-      data = {
-          "model": config["LLM"]["model"],
-          "prompt": prompt,
-          "stream": False,
-      }
-      response = requests.post(url, json=data)
-      refined_llm_insights = response.json()["response"]
-      finding["ai_advice"] = refined_llm_insights
-
-    else:
-      finding["ai_advice"] = (
-          '{"potential_attack_attempt":false,"details":"This is a potential'
-          ' false positive","severity":"low","CVE":"","owasp":'
-          ' "","recommendation":"Nothing to do."}'
-      )
-
-    enriched_findings.append(finding)
-
-  return enriched_findings
-
-
-    
 
 
 def main():
@@ -420,22 +469,6 @@ def main():
 
     encoding_type = 'label_encoding' if args['label_encoding'] == True else 'fraction_encoding'
 
-    FEATURES = [
-        'params_number',
-        #'size', # Stopped using size because it makes a lot of false positive detections
-        'length',
-        'upper_cases',
-        'lower_cases',
-        'special_chars',
-        'url_depth',
-        'user_agent',
-        'http_query',
-        'ip',
-        'return_code',
-        'log_line',
-        ]
-
-
     print('\n')
     #print((termcolor.colored(pyfiglet.figlet_format('Webhawk 3.0',font = 'univers', width=600), color='red')))
 
@@ -454,143 +487,32 @@ def main():
     logging.info('{}Demo plotting is set to {}'.format(' '*4,args['show_plots']))
     logging.info('{}Features standarization is set to {}'.format(' '*4,args['standardize_data']))
 
-    # Get data
-    logging.info('\n> Data reading started')
-
-
-    data = get_data(
-        args['log_file'],
-        None, # No log_content is required as the file path is provided 
-        args['log_type'],
-        LOG_LINES_LIMIT,
-        FEATURES,
-        encoding_type)
-
-    # convert to a dataframe
-    if args['log_type'] != 'os_processes':
-        dataframe = data.to_numpy()[:,list(range(0,len(FEATURES)-1))]
-    else:
-        dataframe = data
-
-    # Standarize data
-    if args['standardize_data']:
-        dataframe = sklearn.preprocessing.StandardScaler().fit_transform(dataframe)
-
-    # Show informative data plots
-    if args['show_plots']:
-        logging.info('\n> Informative plotting started')
-        if args['log_type'] != 'os_processes':
-            plot_data([data['http_query'],data['url_depth']],'Informative plot of http_query and url_depth')
-            plot_data([data['http_query'],data['url_depth'],data['return_code']],'Informative plot of http_query, url_depth and return_code')
-        else:
-            plot_data([data['%CPU'],data['POWER']],'Plotting %CPU and POWER')
-            plot_data([data['%CPU'],data['POWER'],data['CYCLES']],'Plotting %CPU, POWER and CYCLES')
-
-
-    # Dimensiality reduction to 2d using PCA
-    pca = sklearn.decomposition.PCA(n_components=2)
-    principal_components_df = pca.fit_transform(dataframe)
-    dataframe = pd.DataFrame(
-        data = principal_components_df,
-        columns = ['pc_1', 'pc_2'])
-
-    # Display and plot data after applying PCA
-    plot_data([dataframe['pc_1'],dataframe['pc_2']],'Data after dimensiality reduction using PCA')
-
-
-    # Getting or setting epsilon
-    if args['eps'] == None:
-        logging.info('\n> No Epsilon input. Finding the max sorted neighbors curvature point and use it as Epsilon')
-        automatic_max_curve_point = find_max_curvature_point(dataframe, args['show_plots'])
-        selected_eps = automatic_max_curve_point
-        logging.info('{}{}'.format(4*' ',automatic_max_curve_point))
-    else:
-        selected_eps=float(args['eps'])
-
-    if args['opt_silouhette']:
-        logging.info('\n> Optimizing Epsilon to get the best BDSCAN Silhouette Coefficient')
-        best_silouhette, best_eps_for_silouhette = optimize_silouhette_coefficient(selected_eps, dataframe, LAMBDA)
-        logging.info('{}{}'.format(4*' ', best_eps_for_silouhette))
-        selected_eps = best_eps_for_silouhette
-
-    logging.info('{}The value {} will be used as final DBSCAN Epsilon'.format(4*' ', selected_eps))
-
-    logging.info('\n> Starting detection..')
-    # Use dbscan for clustering and train the model
-
-    if args['eps'] == None and args['min_samples'] == None:
-        dbscan = sklearn.cluster.DBSCAN(eps=selected_eps)
-    elif args['eps'] == None:
-        dbscan = sklearn.cluster.DBSCAN(eps=selected_eps, min_samples=int(args['min_samples']))
-    elif args['min_samples'] == None:
-        dbscan = sklearn.cluster.DBSCAN(eps=selected_eps)
-    else:
-        dbscan = sklearn.cluster.DBSCAN(eps=selected_eps, min_samples=int(args['min_samples']))
-    dbscan_model = dbscan.fit(dataframe)
-
-    # Check the number of labels (if 1 then try without EPS value)
-    if len(set(dbscan_model.labels_)) == 1:
-        logging.info('{}Only one cluster was found using the value {} as epsilon'.format(4*' ',selected_eps))
-        logging.info('{}Trying without epsilon'.format(4*' '))
-        dbscan = sklearn.cluster.DBSCAN()
-        dbscan_model = dbscan.fit(dataframe)
-    if len(set(dbscan_model.labels_)) == 1:
-        logging.info('{}Only one cluster was found without an epsilon value. Exiting.'.format(4*' '))
+    result = detect(
+        log_file=args['log_file'],
+        log_content=None,
+        log_type=args['log_type'],
+        log_lines_limit=LOG_LINES_LIMIT,
+        encoding_type=encoding_type,
+        standardize=args['standardize_data'],
+        eps=float(args['eps']) if args['eps'] is not None else None,
+        min_samples=int(args['min_samples']) if args['min_samples'] is not None else None,
+        opt_silhouette=args['opt_silouhette'],
+        opt_lambda=LAMBDA,
+        minority_threshold=THRESHOLD,
+        quick_scan=args['quick_scan'],
+        show_plots=args['show_plots'],
+        plot_after_pca=True,
+    )
+    if result is None:
         sys.exit(0)
 
-    # Get point labels
-    labels = dbscan_model.labels_
-
-    elements_by_cluster = find_elements_by_cluster(labels)
-    number_of_clusters = len(elements_by_cluster.values())
-
-    # Get top minority clusters
-    if args['quick_scan']==True:
-        minority_clusters=[]
-    else:
-        minority_clusters = get_minority_clusters(elements_by_cluster,THRESHOLD)
-        
-
-    # Outliers are considred as high severity findings
-
-    high_findings = catch(labels,data,-1, args['log_type'])
-    if len(high_findings)>0:
-        logging.info ('\n\n\n\n    '+100*'/'+'   HIGH Severity findings   '+100*'\\')
-        print_findings(high_findings, args['log_type'])
-
-    # Points belonging to minority clusters are considred as medium severity findings
-    medium_findings=[]
-    for label in minority_clusters:
-        if label != -1:
-            medium_findings += catch(labels,data,label, args['log_type'])
-
-    if len(medium_findings) > 0:
-        logging.info ('\n\n\n\n    '+100*'/'+'   MEDIUM Severity findings   '+100*'\\')
-        print_findings(medium_findings, args['log_type'])
-
-    all_findings = high_findings + medium_findings
-
-
-
-    # Number of clusters in labels, ignoring noise if present.
-    n_noise = list(labels).count(-1)
-
-    logging.info('\nEstimated number of clusters: %d' % len(set(labels)))
-    logging.info('Estimated number of outliers/anomalous points: %d' % n_noise)
-    logging.info('DBSCAN Silhouette Coefficient: %0.3f' % sklearn.metrics.silhouette_score(dataframe, labels))
-    logging.info('{} log lines detected as containing potential malicious behaviour traces'.format(list(labels).count(-1)))
-    #logging.info('Number of log lines by cluster:{}'.format(find_elements_by_cluster(labels)))
-    logging.info('\nTotal number of log lines:{}'.format(len(data)))
-    if len(minority_clusters)>0:
-        logging.info('{} Minority clusters found'.format(len(minority_clusters)))
-    else:
-        logging.info('No minority clusters found, or you selected a quick scan')
+    all_findings = result['findings']
 
     #where to save the plot
     save_plot_at ='./REPORTS/scan_plot_{}'.format(args['log_file'].split('/')[-1].replace('.','_'))
 
     # plot findings and save the plot if save_plot_at is defined
-    plot_findings(dataframe,labels,save_plot_at)
+    plot_findings(result['dataframe'], result['labels'], save_plot_at)
 
     if args['find_cves'] == True:
         logging.info('> Finding CVEs started')
