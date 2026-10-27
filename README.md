@@ -5,7 +5,7 @@ Unsupervised Machine Learning web attacks detection.
 
 
 <p align="center">  
-  <img width="70%" src="https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch/blob/master/docs/hawk.jpg">
+  <img width="70%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/hawk.jpg">
   <br>
   Image source:https://unsplash.com/photos/i4Y9hr5dxKc (Mathew Schwartz)
 </p>
