@@ -3,6 +3,7 @@
 
 Unsupervised Machine Learning web attacks detection.
 
+Presented at [Black Hat Arsenal USA 2023](docs/blackhat/BHUS23-PPT-Arsenal-Slide-Webhawk-WD_v3.pdf), Black Hat Arsenal USA 2025, and DEF CON Labs Bahrain 2025.
 
 <p align="center">  
   <img width="70%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/hawk.jpg">
