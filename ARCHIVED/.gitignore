@@ -1,8 +1,0 @@
-MODELS/*.pkl
-*.DS_Store
-settings.conf
-webhawk_venv/
-SAMPLE_DATA/labeled-encoded-data-samples/
-
-REPORTS/*
-!REPORTS/.keep
