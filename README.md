@@ -124,7 +124,7 @@ year_threshold:YYYY
 url:http://ollama:11434 #if using docker compose
 url:http://localhost:11434 #if not using docker compose
 model:intigration/analyzer:latest #or select a model of your choice
-prompt:Analyze this web log line for malicious activity. Provide a brief one pragraph (less than 60 words) as a response. Indidate if there is a known related attack or vulnerability. Do not start with 'This log line'
+prompt:Analyze this web log line for malicious activity. Provide a brief one paragraph (less than 60 words) as a response. Indicate if there is a known related attack or vulnerability. Do not start with 'This log line'
 
 [WEBAPP]
 webhawk_ui
@@ -161,7 +161,7 @@ options:
   -r, --report          Create a HTML report
   -z, --opt_silouhette  Optimize DBSCAN silouhette
   -b, --debug           Activate debug logging
-  -c, --label_encoding  Use label encoding instead of frequeny encoding to encode categorical features
+  -c, --label_encoding  Use label encoding instead of frequency encoding to encode categorical features
   -v, --find_cves       Find the CVE(s) that are related to the attack traces
   -a, --get_ai_advice   Get AI advice on the detection
   -q, --quick_scan      Only most critical detection (no minority clusters)
@@ -214,7 +214,7 @@ Webhawk API can be launched using the following command:
 uvicorn app:app --reload
 ```
 Testing the API using:
-The API can be tested using the script api_test.py or by launching the follwoing python commands:
+The API can be tested using the script api_test.py or by launching the following python commands:
 ```python
 import requests
 with open("./SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2017-05-24",'r') as f:
@@ -231,7 +231,7 @@ https://www.secrepo.com.
 
 ## Generating your own testing data
 
-You can alos generate test data using the script ./log_generator/apache_http_log_generator.py
+You can also generate test data using the script ./log_generator/apache_http_log_generator.py
 
 ## Interesting data samples
 
@@ -240,7 +240,7 @@ https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/3QBYB5
 
 
 ## TODO
-Adding more details to the high level design digaram
+Adding more details to the high level design diagram
 Adding finding one by one to Webhawk UI
 Enhancing the UI
 Decoupling data transfer using Kafka (or equivalent)
@@ -248,7 +248,7 @@ Decoupling data transfer using Kafka (or equivalent)
 
 ## Reference
 
-Silhouette Effeciency
+Silhouette Efficiency
 <br>https://bioinformatics-training.github.io/intro-machine-learning-2017/clustering.html
 
 <br>Optimal Value of Epsilon
