@@ -228,7 +228,7 @@ https://www.secrepo.com.
 
 ## Generating your own testing data
 
-You can alos generate test data using the script ./TESTING_LOGS_GENERATOR/apache_http_log_generator.py
+You can alos generate test data using the script ./log_generator/apache_http_log_generator.py
 
 ## Interesting data samples
 
