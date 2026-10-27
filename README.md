@@ -5,7 +5,7 @@ Unsupervised Machine Learning web attacks detection.
 
 
 <p align="center">  
-  <img width="70%" src="https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch/blob/master/IMAGES/hawk.jpg">
+  <img width="70%" src="https://github.com/slrbl/unsupervised-learning-attack-detection-webhawk-catch/blob/master/docs/hawk.jpg">
   <br>
   Image source:https://unsplash.com/photos/i4Y9hr5dxKc (Mathew Schwartz)
 </p>
@@ -29,7 +29,7 @@ To get data from your endpoints, Webhawk provide an agent that your can easily d
 The tool is easy to deploy using Docker Compose, which simplifies the installation of the three main components: the detection engine, the web application, and the LLM services.
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/webhawk_design_v3.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/webhawk_design_v3.png">
 </p>
 
 ## Telemetry
@@ -57,11 +57,11 @@ This service is used to make prompt for LLMs and getting response.
 This service is used to run the web application where the detections results will be treated by cyber analysts.
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/webhawk_app_screenshot_2.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/webhawk_app_screenshot_2.png">
 </p>
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/webhawk_app_screenshot_3.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/webhawk_app_screenshot_3.png">
 </p>
 
 ##### Launching Docker services for the first time 
@@ -178,19 +178,19 @@ python catch.py -l ./SAMPLE_DATA/RAW_APACHE_LOGS/access.log.2022-12-22 --log_typ
 The output of this command is:
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/execution_screeshot.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/execution_screeshot.png">
 </p>
 
 <p align="center">  
-  <img width="80%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure_1.png">
+  <img width="80%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/figure_1.png">
 </p>
 
 <p align="center">  
-  <img width="80%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/figure_2.png">
+  <img width="80%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/figure_2.png">
 </p>
 
 <p align="center">  
-  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/IMAGES/report_screenshot.png">
+  <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/report_screenshot.png">
 </p>
 
 
