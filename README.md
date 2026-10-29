@@ -10,7 +10,7 @@ Author: [Walid Daboubi](https://github.com/slrbl)
 <p align="center">  
   <img width="70%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/hawk.jpg">
   <br>
-  Image source:https://unsplash.com/photos/i4Y9hr5dxKc (Mathew Schwartz)
+  <sub><a href="https://unsplash.com/photos/i4Y9hr5dxKc">Photo by Mathew Schwartz</a></sub>
 </p>
 
 ## Abstract
@@ -37,23 +37,55 @@ The tool is easy to deploy using Docker Compose, which simplifies the installati
 
 ## Production setup
 
-### Configuring webhawk/settings.conf file
-Details about setting up this configuration file can be found in Development setup/Create a settings.conf file section below.
+Production runs three Docker services on one server, plus an agent on each machine that holds logs. The detection API receives logs, Ollama runs the models, and the web application is where analysts review incidents.
 
-### Building and launching Docker services 
+Docker and Docker Compose are required on the server. Python 3 is required on each endpoint that runs the agent.
+
+### Configure the detection engine
+
+Create the configuration before the first build. The image copies `webhawk/` at build time, so a file created later is not included until you build again.
+
+```shell
+cp webhawk/settings.conf.template webhawk/settings.conf
+```
+
+The template is already set for Docker Compose:
+
+- `[LLM]` and `[JEV]` call Ollama at `http://ollama:11434`
+- `[WEBAPP]` posts incidents to `http://webhawk_ui:8080/api/v1/incidents`
+- `[LLM]` `model` is `granite4:latest`
+- `[JEV]` `jev` is `tev1:0.8b`
+
+`ollama_starter.sh` pulls those two models when the Ollama container starts. If you choose another analysis model, put the same name in `webhawk/settings.conf` and in `ollama_starter.sh`.
+
+### Start the services
+
+From the repository root:
 
 ```shell
 docker compose build
 docker compose up
 ```
 
-Once the above command are launched, three services will be running:
+The services listen on:
+
+- analyst UI: `http://localhost:8080`
+- detection API: `http://localhost:8000`
+- Ollama: `http://localhost:11434`
+
+The first start downloads `granite4:latest` and `tev1:0.8b`. Wait until the Ollama logs list both models and the UI is accepting connections before you send logs.
+
 #### Webhawk
-This is the service used for detection, it takes as input a log file and it return detections.
-#### Ollama 
-This service is used to make prompt for LLMs and getting response.
-#### Webhawk web application 
-This service is used to run the web application where the detections results will be treated by cyber analysts.
+
+The detection API. It accepts an Apache access log and writes the incidents to the UI.
+
+#### Ollama
+
+Runs the analysis model and the JEV model.
+
+#### Webhawk web application
+
+The UI where analysts review incidents.
 
 <p align="center">  
   <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/webhawk_app_screenshot_2.png">
@@ -63,15 +95,36 @@ This service is used to run the web application where the detections results wil
   <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/webhawk_app_screenshot_3.png">
 </p>
 
-##### Launching Docker services for the first time 
-If you are launching the Docker services after the first build then you need to expect some delay for the first agent request. In fact this delay is related to downloading of the selected Ollama  model, note that this delay will disappear if you have already added this model pulling to ./ollama_starter.sh.
+### Open the analyst UI
 
-### Webhawk Agent
-To make detection within your endpoints you need to configure and execute webhawk agent which is available in ./webhawk_agent.
+Open `http://localhost:8080` and create an account. The application has no default user.
+
+### Install the agent
+
+On each endpoint, the agent must be able to reach port `8000` on the Docker host. From `webhawk_agent/`:
+
 ```shell
-python webhawk_agent.py -l ./HTTP_LOGS/access.log.2025-02-08
+cp settings.conf.template settings.conf
 ```
-Once the execution is done new incidents will appear in Webhawk web application.
+
+Set the host that runs Docker. Use `127.0.0.1` when the agent runs on that same machine.
+
+```shell
+[WEBHAWK]
+server_ip:127.0.0.1
+server_port:8000
+```
+
+Then install the dependencies and scan an Apache access log:
+
+```shell
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python webhawk_agent.py -l /path/to/access.log
+```
+
+The agent posts the file to `http://<server_ip>:8000/scan`. Incidents show up in the UI when the scan finishes. A log that forms a single cluster produces no incidents.
 
 
 ## Development setup

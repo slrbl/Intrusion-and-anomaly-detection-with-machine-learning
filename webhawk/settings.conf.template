@@ -26,7 +26,7 @@ year_threshold:YYYY
 url:http://ollama:11434
 # Use the following URL if NOT using docker compose services
 #url:http://127.0.0.1:11434
-model:intigration/analyzer:latest
+model:granite4:latest
 model_endpoint=/api/generate
 prompt:You are a cybersecurity expert. Does this log line contain indicators of a potential attack attempt? Your answer has to be in the following STRICT JSON format: '{"potential_attack_attempt":<true or false>,"details":"<a paragraph of less than 200 words>","CVE":<list of associated CVE IDs in the format CVE-<year>-<number> if any>,"owasp":<list of associated OWASP IDs in the format A<number>:<year>-<name> if any>, "recommendation":"<what to recommend to do>"}'. Do not use double quotes within the values. Do not use use backslashes within the values. Make sure that the output json has a correct formatting and that all the special characters are correctly escaped.
 
