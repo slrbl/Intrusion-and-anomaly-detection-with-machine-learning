@@ -9,8 +9,6 @@ Author: [Walid Daboubi](https://github.com/slrbl)
 
 <p align="center">  
   <img width="70%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/hawk.jpg">
-  <br>
-  <sub><a href="https://unsplash.com/photos/i4Y9hr5dxKc">Photo by Mathew Schwartz</a></sub>
 </p>
 
 ## Abstract
@@ -289,9 +287,6 @@ https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/3QBYB5
 
 
 ## TODO
-Adding more details to the high level design diagram
-Adding finding one by one to Webhawk UI
-Enhancing the UI
 Decoupling data transfer using Kafka (or equivalent)
 
 
@@ -305,6 +300,10 @@ Silhouette Efficiency
 
 <br>Max curvature point
 <br>https://towardsdatascience.com/detecting-knee-elbow-points-in-a-graph-d13fc517a63c
+
+<br>Hawk photo 
+<br>https://unsplash.com/photos/i4Y9hr5dxKc
+
 
 ## Contribution
 
