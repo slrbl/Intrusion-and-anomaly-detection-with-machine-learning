@@ -35,10 +35,6 @@ The tool is easy to deploy using Docker Compose, which simplifies the installati
   <img width="100%" src="https://github.com/slrbl/Intrusion-and-anomaly-detection-with-machine-learning/blob/master/docs/webhawk_design_v3.png">
 </p>
 
-## Telemetry
-
-Webhawk collects anonymous telemetry when you run the CLI or the agent. It records only how the tool is used, so the project can be improved. Your log contents are not collected.
-
 ## Production setup
 
 ### Configuring webhawk/settings.conf file
@@ -260,3 +256,7 @@ Silhouette Efficiency
 ## Contribution
 
 All feedback, testing, and contributions are very welcome! If you would like to contribute, fork the project, add your changes, and submit a pull request.
+
+## Telemetry
+
+Webhawk collects anonymous telemetry when you run the CLI or the agent. It records only how the tool is used, so the project can be improved. Your log contents are not collected.
